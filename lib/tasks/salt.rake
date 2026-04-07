@@ -74,4 +74,20 @@ namespace :salt do
     Rake::Task['salt:create_cert'].invoke
     Rake::Task['salt:add_certificate'].invoke
   end
+
+  # task verify_cert: :environment do
+  #   test_cert = ::File.read(Rails.root.join("storage", "certificates", "client_signed_certificate.crt").to_s)
+  #
+  #   response = Excon.post(
+  #     'https://priora.saltedge.com/api/tpp_verifiers/v2/certificates',
+  #     headers: {
+  #       "App-Id" => app_id,
+  #       "App-Secret" => secret_id
+  #     },
+  #     body: "{ data: { certificate: #{test_cert} } }"
+  #   )
+  #
+  #
+  #   p '--response', response, response.body
+  # end
 end

@@ -17,7 +17,7 @@ module SaltEdge
         data: {
           recurringIndicator: true,
           frequencyPerDay: 4,
-          validUntil: 30.days.from_now.strftime("%Y-%m-%d"), # "2026-04-30"
+          validUntil: 30.days.from_now.utc.strftime("%Y-%m-%d"), # "2026-04-30"
           access: {
             allPsd2: "allAccounts"
           }
