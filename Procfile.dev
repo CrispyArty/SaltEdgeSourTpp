@@ -1,0 +1,1 @@
+main: env RUBY_DEBUG_OPEN=true bin/rails server | stdbuf -oL awk '{ print "\033[33m[" strftime("%Y-%m-%d %H:%M:%S") "]\033[0m | " $0 }'

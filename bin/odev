@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+tmux -L overmind new-session -d -s dev "bin/dev"
+#until overmind connect main 2>/dev/null; do
+#  sleep 0.5
+#done
+echo 'Waiting...'
+sleep 1
+exec bin/overmind connect main

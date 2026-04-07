@@ -42,9 +42,23 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem "overmind"
+
+  gem 'rspec-rails', '~> 8.0.0'
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 end
+
+group :test do
+  gem 'vcr'
+  gem 'webmock'
+end
+
+gem 'excon'
+gem "dotenv-rails"
+gem "slim-rails", "~> 4.0"
+

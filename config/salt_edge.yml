@@ -1,0 +1,13 @@
+defaults: &defaults
+  base_uri: "https://priora.saltedge.com"
+  provider_code: "artea_sandbox"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+#  base_uri: "https://example.com"
+
+production:
+  <<: *defaults

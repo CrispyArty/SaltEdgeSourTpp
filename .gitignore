@@ -13,7 +13,7 @@
 !/log/.keep
 !/tmp/.keep
 
-config/database.yml
+#config/database.yml
 /test_results
 
 # Ignore uploaded files in development.
@@ -25,6 +25,11 @@ config/database.yml
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore all environment files.
+/.env*
+!/.env.sample
+
 
 /node_modules
 /yarn-error.log

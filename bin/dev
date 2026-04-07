@@ -1,2 +1,14 @@
-#!/usr/bin/env ruby
-exec "./bin/rails", "server", *ARGV
+#!/usr/bin/env sh
+# exec "./bin/rails", "server", *ARGV
+
+if gem list --no-installed --exact --silent overmind; then
+  echo "Gem overmind not found..."
+
+  exit 1
+fi
+
+# Default to port 3000 if not specified
+export PORT="${PORT:-3000}"
+
+#exec foreman start -f Procfile.dev --env /dev/null "$@"
+exec bin/overmind start -f Procfile.dev

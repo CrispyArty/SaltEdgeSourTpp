@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get "dashboard" => "dashboard#index"
+  get "sign-in" => 'sessions#new'
+  get "sessions/redirect" => 'sessions#redirect'
+  get "sessions/create/:uuid" => 'sessions#create', as: :sessions_create
+  delete "sign-out" => "sessions#destroy"
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

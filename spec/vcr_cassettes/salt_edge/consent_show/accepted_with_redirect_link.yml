@@ -1,0 +1,69 @@
+---
+http_interactions:
+  - request:
+      method: get
+      uri: https://priora.saltedge.com/artea_sandbox/api/berlingroup/v1/consents/385719
+      body:
+        encoding: US-ASCII
+        string: ''
+      headers:
+        X-Request-Id:
+          - 239f5693-cc1a-4cf4-a0c3-a885d6d85b5c
+        Digest:
+          - SHA-256=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+        Date:
+          - Tue, 07 Apr 2026 03:00:13 GMT
+        Tpp-Signature-Certificate:
+          - LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVhekNDQTFPZ0F3SUJBZ0lVRnRIZ2xvelBHckYwR1JoU283aHczQU5tcm1rd0RRWUpLb1pJaHZjTkFRRUwKQlFBd1VURWFNQmdHQTFVRUF3d1JSbUZyWlNCRFFTQkJkWFJvYjNKcGRIa3hFREFPQmdOVkJBb01CMFpoYTJVZwpRMEV4Q3pBSkJnTlZCQVlUQWxWTE1SUXdFZ1lEVlFRSURBdEdZV3RsSUhOMGNtVmxkREFlRncweU5qQTBNRFV4Ck9UTTBOVE5hRncweU56QXpNekV4T1RNME5UTmFNSDR4SERBYUJnTlZCQU1NRTBaaGEyVWdVMjkxY2lCUWIybHUKZENCVVVGQXhIREFhQmdOVkJBb01FMFpoYTJVZ1UyOTFjaUJRYjJsdWRDQlVVRkF4Q3pBSkJnTlZCQVlUQWtkQwpNUlF3RWdZRFZRUUlEQXRHWVd0bElGTjBjbVZsZERFZE1Cc0dBMVVFWVF3VVVFZENMVlJGVTFRdE1UTXpOeTB5Ck1EYzFOREl3Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRRENSQlZJZWVnOHZRQkkKbStMaDZHaDMzQ1hvUGRVOGYwWHE4OWNmbitVcXRxUkNPekcwSi9xZWVpUEE5SVJpeWVNZFNIV04wTU5LbkhSeApJV0M5ODVGNEhEVDlhQ0tSQnZVeGxXeG5rb3VEVWVnYjVFZjhCOStGT0gzRnZHN1NnV3dKellCQjlvdzRFRWMxCjBrdkhZbi85VUp3M1p4dWhGcldtckJQUC9hL01LcVFXejFmaFJaK3B2Mjh6TlF1dXprenJla20zK3BjR2ZvQ2gKRmhOcUorZVF3ZXpNRm56WmpQdDZOdThhVWZQREx0aGZhNHh6c09WNFFpUmhRbTF0eGFZNklYTUNNT3dLMjFiTgpPVnRvSExsNzZEWkFWOXJmVXF5dENsMFBRQ0MvanhoRThyUTlEUDBTSWVVak12Z1hQYzBrM091MDV0WjBoRXRaClRSTkhTWnpQQWdNQkFBR2pnZ0VNTUlJQkNEQU1CZ05WSFJNRUJUQURBUUgvTUIwR0ExVWREZ1FXQkJReGdSUlEKdEFIdWptMHVFeUxUc0dvOHg0ZWNBakFPQmdOVkhROEJBZjhFQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQgpCUVVIQXdJR0NDc0dBUVVGQndNQk1ESUdDQ3NHQVFVRkJ3RURCQ1lNSkM0dUxuTjBZWFJsYldWdWRDQlFVMUJmClFVa2dVRk5RWDFCSklGQlRVRjlEU1M0dUxqQjJCZ05WSFNNRWJ6QnRvVldrVXpCUk1Sb3dHQVlEVlFRRERCRkcKWVd0bElFTkJJRUYxZEdodmNtbDBlVEVRTUE0R0ExVUVDZ3dIUm1GclpTQkRRVEVMTUFrR0ExVUVCaE1DVlVzeApGREFTQmdOVkJBZ01DMFpoYTJVZ2MzUnlaV1YwZ2hRWDJ2SGlTWDVOR21uNmd1dUp3NlZaNzd6K0REQU5CZ2txCmhraUc5dzBCQVFzRkFBT0NBUUVBSlpkWXFvUWp4SnRyUXVhVUlSTzMwUW9waFZQVGxkcytKNkp4eHVPYVpEZFAKWG5WNWE3dGRQVUVxWU1vbWZxc0g4d0l4WlYwQVFkcVFYR0d1bHBaOEdKd1VwOGk0b3lWa2xyUGgveTFNem4zUgoyWm5vYWo3Q1RybS8xUWhVd013Y1l5a2NHdFY1WlFzNnJjZzFYd2NtSnhDTkVHSWJQVFV1YWlhSFBOSHZwRjU2ClFaVUsvVjFRTGlHU2dWcncrYTFTNVowUWtqTXE1UlNIZ2NJclRraWJDMU1lemUyRmNVOCs5NTk0NjZ1VGxTSEgKUjJzcFVjYUMya3NUN0RRbzVHbGtHNUhzVjBpU2d6cnY4allPZnhSYWROT2ZCbTNteVZubkJpR0gyc2ZsanRDUgpzVVFJL0h2N0E4R0R3YXNGZCtPbUh0UnZFem1zU3g5bVpFQlJzZWMzY1E9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+        Signature:
+          - keyId="SN=16D1E0968CCF1AB174191852A3B870DC0366AE69,CA=/CN=Fake CA Authority/O=Fake
+            CA/C=UK/ST=Fake street",algorithm="rsa-sha256",headers="x-request-id digest
+            date",signature="tsQE6mnvpw1aB6Dl6gWLySMZccDFTZ88vAqZcDmdTC5PgPIz2OMogFOMr9hSo9vJYElBLauzDOrIscazd16SCZ5qVOVlX5+5uhfr+fVe0LIxW7ZRfNNJE5LM3romqyye18xufe9MHN+g3fzMGixqXX5iMJMRUyXTjHRk3Xsz4SZvGKjLrD9Oxze2NwZHY8AcvHpn9qxMDehCmNB5J6QthuWgmXiM7qC75wRhVTD3TIrvNGD+h1EAXp+UJ6gv7awHNqjN131lgjhv3QtDsU7VnvimuV1WmGpFWFj45kbW3uwaHjYk9Z/GRoX9imzL90uyIuh6RVrvREbhelcsHzBQ4g=="
+        Accept-Encoding:
+          - deflate, gzip
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Date:
+          - Tue, 07 Apr 2026 03:00:13 GMT
+        Content-Type:
+          - application/json; charset=utf-8
+        Connection:
+          - keep-alive
+        Keep-Alive:
+          - timeout=60
+        Feature-Policy:
+          - vibrate 'self'; usermedia *; sync-xhr 'self' https://priora.saltedge.com
+        X-Frame-Options:
+          - SAMEORIGIN
+        X-Content-Type-Options:
+          - nosniff
+        Cache-Control:
+          - no-store
+        Pragma:
+          - no-cache
+        Expires:
+          - '0'
+        Etag:
+          - W/"38b282e8c18ad9049dfdbfe14a6b07ff"
+        Content-Security-Policy:
+          - base-uri 'self'; default-src 'self'; form-action 'self' https://id.atlassian.com
+            https://compliance-saltedge.atlassian.net; report-uri /logger/csp; object-src
+            'none'; upgrade-insecure-requests
+        X-Request-Id:
+          - 239f5693-cc1a-4cf4-a0c3-a885d6d85b5c
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains; preload
+        Referrer-Policy:
+          - same-origin
+        Content-Encoding:
+          - ''
+        X-Permitted-Cross-Domain-Policies:
+          - none
+      body:
+        encoding: UTF-8
+        string: '{"access":{"allPsd2":"allAccounts"},"recurringIndicator":true,"validUntil":"2026-04-30T00:00:00Z","frequencyPerDay":4,"consentStatus":"received","_links":{"status":{"href":"/artea_sandbox/api/berlingroup/v1/consents/385719/status"},"scaStatus":{"href":"/artea_sandbox/api/berlingroup/v1/consents/385719/authorisations/569264"},"scaRedirect":{"href":"https://connector.saltedge.com/artea_sandbox/oauth/aisp/authorize/e1457354-724c-4d9c-8e5d-cbfba66d616b"}}}'
+    recorded_at: Tue, 07 Apr 2026 03:00:13 GMT
+recorded_with: VCR 6.4.0
