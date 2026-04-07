@@ -1,2 +1,22 @@
-h1 Dashboard#index
-p Find me in app/views/dashboard/index.html.slim
+h1 Dashboard / Accounts
+
+table.table.table-hover.mt-5
+  thead
+    tr
+      th[scope="col"] #
+      th[scope="col"] Name
+      th[scope="col"] Account Identifier
+      th[scope="col"] IBAN
+      th[scope="col"] Balances
+      th[scope="col"] Transactions
+  tbody
+    - @data[:accounts].each do |account|
+      tr
+        th[scope="row"] = account[:resourceId]
+        td = account[:name]
+        td = account[:bankAccountIdentifier]
+        td = account[:iban]
+        td
+          - account[:balances].each do |balance|
+            p.mb-0 = "#{balance[:balanceType]}: #{balance[:balanceAmount][:amount]} #{balance[:balanceAmount][:currency]}"
+        td = link_to "Transactions", transactions_account_path(account[:resourceId])

@@ -1,0 +1,33 @@
+h1 Dashboard / Account ##{params[:id]} / Transactions
+
+h2.mt-5 Pending transactions
+table.table.table-hover.mt-2
+  thead
+    tr
+      th[scope="col"] #
+      th[scope="col"] Creditor Name
+      th[scope="col"] Debtor Name
+      th[scope="col"] Info
+      th[scope="col"] Amount
+      th[scope="col"] Date
+  tbody
+    - if @data[:transactions][:pending].empty?
+      td colspan="6" No pending transactions found.
+    - @data[:transactions][:pending].each do |transaction|
+      == render "transaction_row", transaction: transaction
+
+h2.mt-5 Booked transactions
+table.table.table-hover.mt-2.mb-5
+  thead
+    tr
+      th[scope="col"] #
+      th[scope="col"] Creditor Name
+      th[scope="col"] Debtor Name
+      th[scope="col"] Info
+      th[scope="col"] Amount
+      th[scope="col"] Date
+  tbody
+    - if @data[:transactions][:booked].empty?
+      td colspan="2" No booked transactions found.
+    - @data[:transactions][:booked].each do |transaction|
+      == render "transaction_row", transaction: transaction

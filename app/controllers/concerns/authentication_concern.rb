@@ -6,7 +6,7 @@ module AuthenticationConcern
   end
 
   def current_user
-    Current.user ||= { consent_id: session[:consent_id] } if session[:user_id]
+    Current.user ||= { consent_id: session[:consent_id] } if session[:consent_id]
   end
 
   def user_signed_in?
@@ -22,5 +22,9 @@ module AuthenticationConcern
     Current.user = nil
     reset_session
     # session.delete(:consent_id)
+  end
+
+  def authenticate_user!
+    redirect_to sign_in_path, alert: "You need to sign in first" unless current_user.present?
   end
 end

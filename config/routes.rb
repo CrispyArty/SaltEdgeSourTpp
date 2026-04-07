@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :posts
+  # namespace :accounts do
+  #   get "transactions/show", on: :member
+  # end
+  resources :accounts, only: [] do
+    get :transactions, on: :member
+  end
+
   get "dashboard" => "dashboard#index"
   get "sign-in" => 'sessions#new'
   get "sessions/redirect" => 'sessions#redirect'

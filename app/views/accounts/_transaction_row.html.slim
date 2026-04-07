@@ -1,0 +1,11 @@
+tr
+  td = transaction[:transactionId]
+  td.text-nowrap = transaction[:creditorName]
+  td.text-nowrap = transaction[:debtorName]
+  td
+    p.mb-0
+      b = transaction[:remittanceInformationStructured]
+    p.mb-0 = transaction[:remittanceInformationUnstructured]
+
+  td.text-nowrap = "#{transaction[:transactionAmount][:amount]} #{transaction[:transactionAmount][:currency]}"
+  td.text-nowrap = transaction[:valueDate]
