@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   private
 
   def verify_certificate!
-    render 'errors/not_setup', layout: 'auth', status: 500 if Rails.root.join("storage", "certificates", "client_signed_certificate.crt")
+    cert_path = Rails.root.join("storage", "certificates", "client_signed_certificate.crt")
+
+    render 'errors/not_setup', layout: 'error', status: 500 unless File.exist?(cert_path)
   end
 end
