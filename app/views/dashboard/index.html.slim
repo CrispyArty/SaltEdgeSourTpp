@@ -12,7 +12,7 @@ table.table.table-hover.mt-5
   tbody
     - @data[:accounts].each do |account|
       tr
-        th[scope="row"] = account[:resourceId]
+        td = account[:resourceId]
         td = account[:name]
         td = account[:bankAccountIdentifier]
         td = account[:iban]

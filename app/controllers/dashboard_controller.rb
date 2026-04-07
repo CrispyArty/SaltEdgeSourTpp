@@ -2,6 +2,9 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    # Request to get accounts happens too fast the first time after auth. Added small api request for fix
+    SaltEdge::ConsentShowService.call(consent_id: current_user[:consent_id])
+
     @data = SaltEdge::AccountsService.call(consent_id: current_user[:consent_id])
 
 

@@ -1,6 +1,8 @@
 require 'securerandom'
 
 class SessionsController < ApplicationController
+  before_action :verify_guest!, except: :destroy
+
   layout 'auth'
 
   def new
@@ -37,5 +39,11 @@ class SessionsController < ApplicationController
     sign_out
 
     redirect_to sign_in_path
+  end
+
+  private
+
+  def verify_guest!
+    redirect_to dashboard_path if current_user.present?
   end
 end

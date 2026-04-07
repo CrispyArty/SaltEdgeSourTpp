@@ -1,16 +1,30 @@
 module SaltEdge
-  class RegisterTppService
+  class RegisterTppService < ApplicationService
+    attr_reader :client
+
     def initialize(client: ClientFactory.global)
       @client = client
     end
 
-    def call(consent_id:)
-      # TODO
-      # response = client.get('v1/accounts', { 'Consent-Id' => consent_id }, {
-      #   withBalance: true
-      # })
-      #
-      # response.body
+    def call
+      client.post('tpp/register', data: {
+        company: {
+          address: "Test address",
+          email: "artemti0@gmail.com",
+          name: "Test name",
+          phone_number: "+1 (212) 555-0100",
+          zip_code: "GB",
+          city: "Test city"
+        },
+        representative: {
+          email: "artemti0@gmail.com",
+          name: "Test Name"
+        },
+        certificate: {
+          name: "Sour Point certificate",
+          type: "qseal"
+        }
+      })
     end
   end
 end
