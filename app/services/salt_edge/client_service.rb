@@ -23,7 +23,7 @@ module SaltEdge
 
     def get(path, headers: {}, data: {})
 
-      p "=======GET #{uri_builder.build(path)}"
+      # p "=======GET #{uri_builder.build(path)}"
 
       response = Excon.get(
         uri_builder.build(path),
@@ -31,14 +31,14 @@ module SaltEdge
         query: data
       )
 
-      p '-------responseGet', response, response.body
+      # p '-------responseGet', response, response.body
       raise ApiError if response.status >= 400
 
       JSON.parse(response.body)
     end
 
     def post(path, headers: {}, data: {})
-      p "=======POST #{uri_builder.build(path)}"
+      # p "=======POST #{uri_builder.build(path)}"
 
       body = data.to_json
       response = Excon.post(
@@ -49,7 +49,7 @@ module SaltEdge
         body: body
       )
 
-      p '-------responsePost', response, response.body
+      # p '-------responsePost', response, response.body
 
       raise ApiError if response.status >= 400
 

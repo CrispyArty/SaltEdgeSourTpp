@@ -5,11 +5,13 @@ module SaltEdge
     end
 
     def call(consent_id:)
-      response = client.get('v1/accounts', { 'Consent-Id' => consent_id }, {
-        withBalance: true
-      })
 
-      response.body
+      # TODO
+      # response = client.get('v1/accounts', { 'Consent-Id' => consent_id }, {
+      #   withBalance: true
+      # })
+      #
+      # response.body
     end
   end
 end

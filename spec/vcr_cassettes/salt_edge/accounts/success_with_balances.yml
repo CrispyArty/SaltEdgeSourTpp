@@ -1,0 +1,73 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://priora.saltedge.com/artea_sandbox/api/berlingroup/v1/accounts?withBalance=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Request-Id:
+      - dfed4f84-dbb5-4594-8d06-8d96f2b3f469
+      Digest:
+      - SHA-256=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+      Date:
+      - Tue, 07 Apr 2026 07:18:36 GMT
+      Tpp-Signature-Certificate:
+      - LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVhekNDQTFPZ0F3SUJBZ0lVRnRIZ2xvelBHckYwR1JoU283aHczQU5tcm1rd0RRWUpLb1pJaHZjTkFRRUwKQlFBd1VURWFNQmdHQTFVRUF3d1JSbUZyWlNCRFFTQkJkWFJvYjNKcGRIa3hFREFPQmdOVkJBb01CMFpoYTJVZwpRMEV4Q3pBSkJnTlZCQVlUQWxWTE1SUXdFZ1lEVlFRSURBdEdZV3RsSUhOMGNtVmxkREFlRncweU5qQTBNRFV4Ck9UTTBOVE5hRncweU56QXpNekV4T1RNME5UTmFNSDR4SERBYUJnTlZCQU1NRTBaaGEyVWdVMjkxY2lCUWIybHUKZENCVVVGQXhIREFhQmdOVkJBb01FMFpoYTJVZ1UyOTFjaUJRYjJsdWRDQlVVRkF4Q3pBSkJnTlZCQVlUQWtkQwpNUlF3RWdZRFZRUUlEQXRHWVd0bElGTjBjbVZsZERFZE1Cc0dBMVVFWVF3VVVFZENMVlJGVTFRdE1UTXpOeTB5Ck1EYzFOREl3Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRRENSQlZJZWVnOHZRQkkKbStMaDZHaDMzQ1hvUGRVOGYwWHE4OWNmbitVcXRxUkNPekcwSi9xZWVpUEE5SVJpeWVNZFNIV04wTU5LbkhSeApJV0M5ODVGNEhEVDlhQ0tSQnZVeGxXeG5rb3VEVWVnYjVFZjhCOStGT0gzRnZHN1NnV3dKellCQjlvdzRFRWMxCjBrdkhZbi85VUp3M1p4dWhGcldtckJQUC9hL01LcVFXejFmaFJaK3B2Mjh6TlF1dXprenJla20zK3BjR2ZvQ2gKRmhOcUorZVF3ZXpNRm56WmpQdDZOdThhVWZQREx0aGZhNHh6c09WNFFpUmhRbTF0eGFZNklYTUNNT3dLMjFiTgpPVnRvSExsNzZEWkFWOXJmVXF5dENsMFBRQ0MvanhoRThyUTlEUDBTSWVVak12Z1hQYzBrM091MDV0WjBoRXRaClRSTkhTWnpQQWdNQkFBR2pnZ0VNTUlJQkNEQU1CZ05WSFJNRUJUQURBUUgvTUIwR0ExVWREZ1FXQkJReGdSUlEKdEFIdWptMHVFeUxUc0dvOHg0ZWNBakFPQmdOVkhROEJBZjhFQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQgpCUVVIQXdJR0NDc0dBUVVGQndNQk1ESUdDQ3NHQVFVRkJ3RURCQ1lNSkM0dUxuTjBZWFJsYldWdWRDQlFVMUJmClFVa2dVRk5RWDFCSklGQlRVRjlEU1M0dUxqQjJCZ05WSFNNRWJ6QnRvVldrVXpCUk1Sb3dHQVlEVlFRRERCRkcKWVd0bElFTkJJRUYxZEdodmNtbDBlVEVRTUE0R0ExVUVDZ3dIUm1GclpTQkRRVEVMTUFrR0ExVUVCaE1DVlVzeApGREFTQmdOVkJBZ01DMFpoYTJVZ2MzUnlaV1YwZ2hRWDJ2SGlTWDVOR21uNmd1dUp3NlZaNzd6K0REQU5CZ2txCmhraUc5dzBCQVFzRkFBT0NBUUVBSlpkWXFvUWp4SnRyUXVhVUlSTzMwUW9waFZQVGxkcytKNkp4eHVPYVpEZFAKWG5WNWE3dGRQVUVxWU1vbWZxc0g4d0l4WlYwQVFkcVFYR0d1bHBaOEdKd1VwOGk0b3lWa2xyUGgveTFNem4zUgoyWm5vYWo3Q1RybS8xUWhVd013Y1l5a2NHdFY1WlFzNnJjZzFYd2NtSnhDTkVHSWJQVFV1YWlhSFBOSHZwRjU2ClFaVUsvVjFRTGlHU2dWcncrYTFTNVowUWtqTXE1UlNIZ2NJclRraWJDMU1lemUyRmNVOCs5NTk0NjZ1VGxTSEgKUjJzcFVjYUMya3NUN0RRbzVHbGtHNUhzVjBpU2d6cnY4allPZnhSYWROT2ZCbTNteVZubkJpR0gyc2ZsanRDUgpzVVFJL0h2N0E4R0R3YXNGZCtPbUh0UnZFem1zU3g5bVpFQlJzZWMzY1E9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+      Signature:
+      - keyId="SN=16D1E0968CCF1AB174191852A3B870DC0366AE69,CA=/CN=Fake CA Authority/O=Fake
+        CA/C=UK/ST=Fake street",algorithm="rsa-sha256",headers="x-request-id digest
+        date",signature="vBkaFGFTYOQmF+kacVauA2hU6IZbN/R6PBUnk0lURtEjZ1wXfgGShPl88NaHAjdp9f1nxV8IpQ9ZANJM3zBB/OqZqbugL4DF2ypVgDap+HppapP1uXHHccJqNK8Lz6ix2kW5Cl+5BFj+Z7KWH7Kbsan5KcFmbliExByVbW5y26GnlLxqh4vdn+v+qhhjwEm8ynuvXqLHZ3st7VbrVQUnfpdTxExL34PSn+InUjh6g2b08qFOeDuqqx+0y84jc62uIJ5MyRyZhVPwaQrZQp8NSBlhMgERqhquL1m0x4oN44jl6UebJhdwhvYF+knw2leZ7Bwjygjye4KZADO0dNtylg=="
+      Consent-Id:
+      - '385730'
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 07 Apr 2026 07:18:36 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=60
+      Feature-Policy:
+      - vibrate 'self'; usermedia *; sync-xhr 'self' https://priora.saltedge.com
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Etag:
+      - W/"24b258465f8c97787c0fd171ce4b8c3b"
+      Content-Security-Policy:
+      - base-uri 'self'; default-src 'self'; form-action 'self' https://id.atlassian.com
+        https://compliance-saltedge.atlassian.net; report-uri /logger/csp; object-src
+        'none'; upgrade-insecure-requests
+      X-Request-Id:
+      - dfed4f84-dbb5-4594-8d06-8d96f2b3f469
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - same-origin
+      Content-Encoding:
+      - ''
+      X-Permitted-Cross-Domain-Policies:
+      - none
+    body:
+      encoding: UTF-8
+      string: '{"accounts":[{"resourceId":"480753","cashAccountType":"CACC","balances":[{"balanceType":"interimAvailable","balanceAmount":{"currency":"EUR","amount":"5166"},"referenceDate":"2019-10-25","creditLimitIncluded":true},{"balanceType":"interimBooked","balanceAmount":{"currency":"EUR","amount":"9141"},"lastChangeDateTime":"2019-10-25T15:30:35Z","creditLimitIncluded":true},{"balanceType":"closingBooked","balanceAmount":{"currency":"EUR","amount":"2323"},"referenceDate":"2019-10-25"},{"balanceType":"interimBooked","balanceAmount":{"currency":"EUR","amount":"3433"},"lastChangeDateTime":"2019-10-25T15:30:35Z"}],"iban":"LT88196778668852","bic":"GMZAAG38","ownerName":"owner_name","bankAccountIdentifier":"123412341234","name":"Current
+        Account","status":"enabled","currency":"EUR","product":"Current Account","_links":{"transactions":{"href":"/artea_sandbox/api/berlingroup/v1/accounts/480753/transactions"}}},{"resourceId":"480754","cashAccountType":"CACC","balances":[{"balanceType":"interimAvailable","balanceAmount":{"currency":"EUR","amount":"2211"},"referenceDate":"2019-10-25","creditLimitIncluded":true},{"balanceType":"interimBooked","balanceAmount":{"currency":"EUR","amount":"3333"},"lastChangeDateTime":"2019-10-25T15:30:35Z"},{"balanceType":"closingBooked","balanceAmount":{"currency":"EUR","amount":"4434"},"referenceDate":"2019-10-25"},{"balanceType":"interimBooked","balanceAmount":{"currency":"EUR","amount":"2319"},"lastChangeDateTime":"2019-10-25T15:30:35Z"}],"iban":"LT65358601431081","bic":"HQONKP68","ownerName":"owner_name","bankAccountIdentifier":"123412341234","name":"Aggregation
+        Account","status":"enabled","currency":"EUR","product":"Current Account","_links":{"transactions":{"href":"/artea_sandbox/api/berlingroup/v1/accounts/480754/transactions"}}}]}'
+  recorded_at: Tue, 07 Apr 2026 07:18:37 GMT
+recorded_with: VCR 6.4.0

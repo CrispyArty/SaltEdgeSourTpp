@@ -1,33 +1,47 @@
-h1 Dashboard / Account ##{params[:id]} / Transactions
+h1 #{link_to 'Dashboard', dashboard_path} / Account ##{params[:id]} / Transactions
 
-h2.mt-5 Pending transactions
+.d-flex.justify-content-between.mt-5
+  .prev
+    - if @offset > 0
+      = link_to 'Prev', transactions_account_path(params[:id], offset: @offset - @limit), class: "btn btn-primary btn-lg"
+  .next
+    - if @next_page_params.present?
+      = link_to 'Next', transactions_account_path(params[:id], offset: @next_page_params[:offset]), class: "btn btn-primary btn-lg"
+h2 Pending transactions (#{@pending.length})
 table.table.table-hover.mt-2
   thead
     tr
       th[scope="col"] #
-      th[scope="col"] Creditor Name
-      th[scope="col"] Debtor Name
-      th[scope="col"] Info
-      th[scope="col"] Amount
-      th[scope="col"] Date
+      th.text-nowrap[scope="col"] Creditor Name
+      th.text-nowrap[scope="col"] Debtor Name
+      th.w-100[scope="col"] Info
+      th.text-nowrap[scope="col"] Amount
+      th.text-nowrap[scope="col"] Date
   tbody
-    - if @data[:transactions][:pending].empty?
+    - if @pending.empty?
       td colspan="6" No pending transactions found.
-    - @data[:transactions][:pending].each do |transaction|
+    - @pending.each do |transaction|
       == render "transaction_row", transaction: transaction
 
-h2.mt-5 Booked transactions
+h2.mt-5 Booked transactions (#{@booked.length})
 table.table.table-hover.mt-2.mb-5
   thead
     tr
       th[scope="col"] #
-      th[scope="col"] Creditor Name
-      th[scope="col"] Debtor Name
-      th[scope="col"] Info
-      th[scope="col"] Amount
-      th[scope="col"] Date
+      th.text-nowrap[scope="col"] Creditor Name
+      th.text-nowrap[scope="col"] Debtor Name
+      th.w-100[scope="col"] Info
+      th.text-nowrap[scope="col"] Amount
+      th.text-nowrap[scope="col"] Date
   tbody
-    - if @data[:transactions][:booked].empty?
+    - if @booked.empty?
       td colspan="2" No booked transactions found.
-    - @data[:transactions][:booked].each do |transaction|
+    - @booked.each do |transaction|
       == render "transaction_row", transaction: transaction
+.d-flex.justify-content-between.mb-5
+  .prev
+    - if @offset > 0
+      = link_to 'Prev', transactions_account_path(params[:id], offset: @offset - @limit), class: "btn btn-primary btn-lg"
+  .next
+    - if @next_page_params.present?
+      = link_to 'Next', transactions_account_path(params[:id], offset: @next_page_params[:offset]), class: "btn btn-primary btn-lg"

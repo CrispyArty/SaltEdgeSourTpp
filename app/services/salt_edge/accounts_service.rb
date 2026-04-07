@@ -1,15 +1,20 @@
 module SaltEdge
-  class AccountsService
-    def initialize(client: ClientFactory.with_provider)
+  class AccountsService < ApplicationService
+    attr_reader :consent_id, :client
+
+    def initialize(consent_id:, client: ClientFactory.with_provider)
+      @consent_id = consent_id
       @client = client
     end
 
-    def call(consent_id:)
-      response = client.get('v1/accounts', { 'Consent-Id' => consent_id }, {
-        withBalance: true
-      })
+    def call
+      data = client.get(
+        'accounts',
+        headers: { 'Consent-Id' => consent_id },
+        data: { withBalance: true }
+      )
 
-      response.body
+      data.with_indifferent_access
     end
   end
 end

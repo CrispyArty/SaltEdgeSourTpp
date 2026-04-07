@@ -2,14 +2,3 @@ h1.pb-2 Connect your account
 p Clicking this button will redirect you to you bank website, where you can securely sign in and authorize access. You’ll be redirected to our dashboard once the auth is complete.
 div
   = link_to 'Connect', sessions_redirect_path, class: "btn btn-primary"
-
-/ = form_with(model: post) do |form|
-/   - if post.errors.any?
-/     div style="color: red"
-/       h2 = "#{pluralize(post.errors.count, "error")} prohibited this post from being saved:"
-/       ul
-/         - post.errors.each do |error|
-/           li = error.full_message
-/
-/   div
-/     = form.submit

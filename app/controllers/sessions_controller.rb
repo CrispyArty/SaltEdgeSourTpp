@@ -10,17 +10,12 @@ class SessionsController < ApplicationController
     Rails.application.routes.default_url_options[:host] = request.host
     uuid = SecureRandom.uuid
 
-    # Create Consent for AIS flow
-    p '---sessions_create_url', sessions_create_url(uuid: uuid)
     create_response = ::SaltEdge::ConsentCreateService.call(redirect_url: sessions_create_url(uuid: uuid))
-    p '------------create_response', create_response
 
     show_response = ::SaltEdge::ConsentShowService.call(consent_id: create_response[:consent_id])
 
     Rails.cache.write("user:#{uuid}:consent_creation", { consent_id: create_response[:consent_id] })
 
-    p '-----------show_response', show_response
-    # TODO: Handle exception
     raise "Redirect not found!" unless show_response[:sca_redirect_link].present?
 
     redirect_to show_response[:sca_redirect_link], allow_other_host: true
