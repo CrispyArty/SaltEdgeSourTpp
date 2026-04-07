@@ -2,7 +2,8 @@
 This app lets users view their banking account through our interface
 
 ## Video showcase
-[![Watch the video](https://youtu.be/BHb5KkV5sM8)](https://youtu.be/BHb5KkV5sM8)
+[<img src="https://img.youtube.com/vi/BHb5KkV5sM8/hqdefault.jpg" width="600" height="300"
+/>](https://www.youtube.com/embed/BHb5KkV5sM8)
 
 ## Requirements
 This app currently requires:
