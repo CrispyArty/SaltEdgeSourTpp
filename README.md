@@ -100,7 +100,8 @@ Response 400
 ```ruby
 {"tppMessages" => [{"category" => "ERROR", "code" => "FORMAT_ERROR", "text" => "dateFrom cannot be greater than dateTo"}]}
 ```
-"dateFrom cannot be greater than dateTo" - weird error because dateFrom `2025-03-06` is less than dateTo `2025-04-06`
+"dateFrom cannot be greater than dateTo" \
+Error is weird because dateFrom `2025-03-06` is less than dateTo `2025-04-06`
 
 
 ### Consent creation
