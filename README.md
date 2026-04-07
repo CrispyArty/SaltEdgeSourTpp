@@ -24,7 +24,7 @@ TPP client already exists, this command will only add new certificate to existin
 * **No Database**: Runs entirely without a database connection (ActiveRecord omitted/bypassed).
 
 ## Tests
-You can run tests via
+You can run tests via Rspec
 ```bash
 > rspec
 ```

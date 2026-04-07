@@ -10,14 +10,14 @@ module SaltEdge
       client.post('tpp/register', data: {
         company: {
           address: "Test address",
-          email: "artemti0@gmail.com",
+          email: "crispykindle@gmail.com",
           name: "Test name",
           phone_number: "+1 (212) 555-0100",
           zip_code: "GB",
           city: "Test city"
         },
         representative: {
-          email: "artemti0@gmail.com",
+          email: "crispykindle@gmail.com",
           name: "Test Name"
         },
         certificate: {

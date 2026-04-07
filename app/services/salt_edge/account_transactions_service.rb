@@ -19,8 +19,8 @@ module SaltEdge
           paginated: paginated ? 1 : nil,
           limit: paginated ? limit : nil,
           offset: paginated ? offset : nil,
-          dateFrom: 90.days.ago.strftime("%Y-%m-%d"), # "2025-09-11"
-          dateTo: Time.now.strftime("%Y-%m-%d"), #"2026-04-01"
+          dateFrom: 90.days.ago.utc.strftime("%Y-%m-%d"), # "2025-09-11"
+          dateTo: Time.now.utc.strftime("%Y-%m-%d"), #"2026-04-01"
           bookingStatus: "both"
         }.compact
       )
