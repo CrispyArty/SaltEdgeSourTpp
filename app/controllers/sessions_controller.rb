@@ -15,8 +15,6 @@ class SessionsController < ApplicationController
   end
 
   def redirect
-    raise CreateConsentError, "Redirect not found!"
-
     Rails.application.routes.default_url_options[:host] = request.host
     uuid = SecureRandom.uuid
 
