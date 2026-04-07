@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    restart: always
+    ports:
+      - "3000:80" # Maps port 3000 on your host to port 80 in the container (Thruster)
+    env_file:
+      - .env

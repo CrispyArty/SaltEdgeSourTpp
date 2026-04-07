@@ -6,6 +6,13 @@ describe 'Sessions', type: :request do
   end
 
   describe "GET /sessions/create/:uuid" do
+
+    let(:consent) { { consent_status: 'valid' } }
+
+    before do
+      allow(SaltEdge::ConsentShowService).to receive(:call).and_return(consent)
+    end
+
     context "has cached user:[uuid]:consent_creation" do
       let(:uuid) { "641ad3cb-027e-4587-adcb-ae49b0688b0b" }
 
@@ -22,11 +29,11 @@ describe 'Sessions', type: :request do
       let(:uuid) { "641ad3cb-027e-4587-adcb-ae49b0688b0b" }
       let(:unrelated_uuid) { "239f5693-cc1a-4cf4-a0c3-a885d6d85b5c" }
 
-      it "responds with 400 BadRequest" do
+      it "responds with 422 Unprocessable Entity" do
         Rails.cache.write("user:#{unrelated_uuid}:consent_creation", { consent_id: "11" })
 
         get sessions_create_path(uuid: uuid)
-        expect(response).to have_http_status(400)
+        expect(response).to have_http_status(422)
         expect(session[:consent_id]).to be_nil
       end
     end
