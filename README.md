@@ -45,6 +45,11 @@ client.get(
 )
 ```
 
+## Diagram
+<img width="1061" height="1111" alt="TppSaltEdge2 drawio" src="https://github.com/user-attachments/assets/90915c31-b12f-4fe2-9be4-c4a5b5a69462" />
+
+
+
 ## Docs problems and inconsistencies
 
 ### Certificate creation and validation
