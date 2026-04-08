@@ -50,7 +50,7 @@ client.get(
 
 
 
-## Docs problems and inconsistencies
+## Docs inconsistencies and remarks
 
 ### Certificate creation and validation
 
