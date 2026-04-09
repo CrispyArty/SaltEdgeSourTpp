@@ -10,7 +10,7 @@ This app currently requires:
 
 * **Rails 8.1**
 * **Ruby ruby-3.4.4  or newer**
-* openssl
+* **openssl** - System binary required for certificate generation via shell execution
 
 ## Setup
 To run this app you need to run rake task that will set up necessary files.
@@ -73,18 +73,18 @@ client.get(
 
   However, to use this API you need the TppVerifierClient app_id and app_secret. To obtain those credentials, a valid certificate is required to register a TPP client in the first place. \
 
-  Side note: After I had registered a TPP client, I found its `app_id`, `app_secret` in dashboard, tried to use it with this api and received error
+  *Side note*: After I had registered a TPP client, I found its `app_id`, `app_secret` in dashboard, tried to use it with this api and received error
   ```
   {"error_class":"TppVerifierClientNotFound","error_message":"TppVerifierClient with App-Id: '12bba2a7-b5bc-43df-b214-f2bd8573b3e4' was not found.","meta":{"time":"2026-04-07T21:58:37Z","version":"V2"}}
   ```
 ### Error on getting transactions older than a year
-If dateTo is older than a year from now, there is a weird error.
+If **dateTo** is older than a year from now, there is a weird error.
 
 Current date: `2026-04-07`
 
 ---
 
-#### Request with dateFrom `2025-03-15` and dateTo `2025-04-15`
+#### Request with dateFrom `2025-03-15` and dateTo `2025-04-15` (less than a year from now)
 
 ```
 /v1/accounts/480753/transactions?bookingStatus=both&dateFrom=2025-03-15&dateTo=2025-04-15
@@ -97,7 +97,7 @@ Response 200
 ```
 ---
 
-#### Request with dateFrom `2025-03-06` and dateTo `2025-04-06`
+#### Request with dateFrom `2025-03-06` and dateTo `2025-04-06` (more than a year from now)
 
 ```
 v1/accounts/480753/transactions?bookingStatus=both&dateFrom=2025-03-06&dateTo=2025-04-06
@@ -108,7 +108,7 @@ Response 400
 {"tppMessages" => [{"category" => "ERROR", "code" => "FORMAT_ERROR", "text" => "dateFrom cannot be greater than dateTo"}]}
 ```
 "dateFrom cannot be greater than dateTo" \
-Error is weird because dateFrom `2025-03-06` is less than dateTo `2025-04-06`
+Error is weird because **dateFrom** `2025-03-06` is less than **dateTo** `2025-04-06`
 
 
 ### Consent creation
