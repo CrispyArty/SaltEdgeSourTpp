@@ -68,9 +68,11 @@ client.get(
     If it wasn't an error on my part, it will be useful to mention this caveat in docs. 
 
 
-- It is mentioned in the docs about certification validation https://priora.saltedge.com/docs/tpp_verifier#certificates-verify-v2. \
-      But in order to use this api you need TppVerifierClient's `app_id` and `app_secret`, and we need a valid certificate to register Tpp Client. \
-  \
+- It is mentioned in the documentation that there is a certificate validation method:
+  https://priora.saltedge.com/docs/tpp_verifier#certificates-verify-v2 \
+
+  However, to use this API you need the TppVerifierClient app_id and app_secret. To obtain those credentials, a valid certificate is required to register a TPP client in the first place. \
+
   Side note: After I had registered a TPP client, I found its `app_id`, `app_secret` in dashboard, tried to use it with this api and received error
   ```
   {"error_class":"TppVerifierClientNotFound","error_message":"TppVerifierClient with App-Id: '12bba2a7-b5bc-43df-b214-f2bd8573b3e4' was not found.","meta":{"time":"2026-04-07T21:58:37Z","version":"V2"}}
