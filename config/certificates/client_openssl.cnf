@@ -10,7 +10,7 @@ req_extensions = cert_ext
 CN = Fake Sour Point TPP
 O = Fake Sour Point TPP
 C = GB
-ST = Fake Name Street
+ST = Fake TestTest Street
 organizationIdentifier = PGB-ARTIOM-1337-207542
 
 [ cert_ext ]
