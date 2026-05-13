@@ -11,7 +11,7 @@ CN = Fake Sour Point TPP
 O = Fake Sour Point TPP
 C = GB
 ST = Fake Street
-organizationIdentifier = PGB-TEST-1337-207542
+organizationIdentifier = PGB-ARTIOM-1337-207542
 
 [ cert_ext ]
 basicConstraints = CA:TRUE

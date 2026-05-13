@@ -1,5 +1,5 @@
 defaults: &defaults
-  base_uri: "https://priora.saltedge.com"
+  base_uri: "https://priora.banksalt.com"
   provider_code: "artea_sandbox"
 
 development:
