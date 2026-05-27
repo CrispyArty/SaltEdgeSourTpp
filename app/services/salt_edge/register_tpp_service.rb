@@ -7,7 +7,7 @@ module SaltEdge
     end
 
     def call
-      client.post('tpp/register', data: {
+      client.post("tpp/register", data: {
         company: {
           address: "Test address",
           email: "artiom.teleshman@saltedge.com",

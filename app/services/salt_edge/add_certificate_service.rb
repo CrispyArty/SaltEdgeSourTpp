@@ -7,7 +7,7 @@ module SaltEdge
     end
 
     def call
-      client.post('tpp/certificates', data: {
+      client.post("tpp/certificates", data: {
         certificate: {
           name: "Sour Point certificate",
           type: "qseal"

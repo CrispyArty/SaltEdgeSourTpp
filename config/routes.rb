@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :posts
   # namespace :accounts do
   #   get "transactions/show", on: :member
   # end
@@ -7,10 +6,14 @@ Rails.application.routes.draw do
     get :transactions, on: :member
   end
 
+  namespace :api do
+     resources :users, only: [ :index, :show, :create ]
+  end
+
   get "dashboard" => "dashboard#index"
-  get "sign-in" => 'sessions#new'
-  get "sessions/redirect" => 'sessions#redirect'
-  get "sessions/create/:uuid" => 'sessions#create', as: :sessions_create
+  get "sign-in" => "sessions#new"
+  get "sessions/redirect" => "sessions#redirect"
+  get "sessions/create/:uuid" => "sessions#create", as: :sessions_create
   delete "sign-out" => "sessions#destroy"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

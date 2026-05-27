@@ -6,7 +6,6 @@ describe 'Sessions', type: :request do
   end
 
   describe "GET /sessions/create/:uuid" do
-
     let(:consent) { { consent_status: 'valid' } }
 
     before do
@@ -66,7 +65,5 @@ describe 'Sessions', type: :request do
       expect(response).to have_http_status(302)
       expect(response).to redirect_to("https://example.com/redirect")
     end
-
   end
-
 end

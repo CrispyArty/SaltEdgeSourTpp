@@ -1,8 +1,10 @@
 # frozen_string_literal: true
+
 module SaltEdge
   module UriBuilders
     class UriBuilder
       attr_accessor :base_uri
+
       def initialize(*, **)
         @base_uri = Rails.configuration.salt_edge[:base_uri]
       end
@@ -29,5 +31,10 @@ module SaltEdge
       end
     end
 
+    class Base < UriBuilder
+      def build(endpoint)
+        "#{base_uri}/api/#{endpoint}"
+      end
+    end
   end
 end

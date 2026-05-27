@@ -1,9 +1,9 @@
-require 'openssl'
-require 'base64'
-require 'securerandom'
-require 'excon'
-require 'time'
-require 'json'
+require "openssl"
+require "base64"
+require "securerandom"
+require "excon"
+require "time"
+require "json"
 
 module SaltEdge
   class ClientService
@@ -22,6 +22,9 @@ module SaltEdge
     end
 
     def get(path, headers: {}, data: {})
+      # p "GETuri_builder.build(path)", uri_builder.build(path)
+      # return
+
       response = Excon.get(
         uri_builder.build(path),
         headers: generate_headers(headers),
@@ -34,6 +37,9 @@ module SaltEdge
     end
 
     def post(path, headers: {}, data: {})
+      # p "POSTuri_builder.build(path)", uri_builder.build(path)
+      # return
+
       body = data.to_json
       response = Excon.post(
         uri_builder.build(path),
@@ -52,7 +58,7 @@ module SaltEdge
 
     attr_accessor :cert, :tpp_signature_certificate, :certfile, :private_key, :uri_builder
 
-    def generate_headers(headers, body = '')
+    def generate_headers(headers, body = "")
       sign, rest = separate_headers(headers)
 
       sign_headers = pre_headers(body).merge(sign)
@@ -63,12 +69,11 @@ module SaltEdge
       ).merge(rest)
     end
 
-
     def pre_headers(body)
       {
         "X-Request-ID" => SecureRandom.uuid,
         "Digest" => digest(body),
-        "Date" => Time.now.utc.httpdate,
+        "Date" => Time.now.utc.httpdate
       }
     end
 
@@ -84,7 +89,7 @@ module SaltEdge
         end
       end
 
-      [headers_for_sign, rest]
+      [ headers_for_sign, rest ]
     end
 
     def digest(body)
@@ -94,9 +99,9 @@ module SaltEdge
     end
 
     def signature(headers)
-      key_id = "SN=#{cert.serial.to_s(16).upcase},CA=#{cert.issuer.to_s}"
+      key_id = "SN=#{cert.serial.to_s(16).upcase},CA=#{cert.issuer}"
       algorithm = "rsa-sha256"
-      header_keys = headers.keys.join(' ').downcase
+      header_keys = headers.keys.join(" ").downcase
 
       headers_str = headers.map { |k, v| "#{k.downcase}: #{v}" }.join("\n")
       sign = private_key.sign(OpenSSL::Digest::SHA256.new, headers_str)
@@ -104,6 +109,5 @@ module SaltEdge
 
       "keyId=\"#{key_id}\",algorithm=\"#{algorithm}\",headers=\"#{header_keys}\",signature=\"#{signature}\""
     end
-
   end
 end

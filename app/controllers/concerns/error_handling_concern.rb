@@ -13,13 +13,13 @@ module ErrorHandlingConcern
 
   def render_unprocessable_entity_response(exception)
     @errors = exception.respond_to?(:record) ? exception.record.errors : []
-    render 'api/v1/application/errors/unprocessable_entity', status: :unprocessable_entity
+    render "api/v1/application/errors/unprocessable_entity", status: :unprocessable_entity
   end
 
 
   def render_forbidden_response(exception)
     @exception = exception
-    render 'api/v1/application/errors/forbidden', status: :forbidden
+    render "api/v1/application/errors/forbidden", status: :forbidden
   end
 
   # # Workaround: https://github.com/rails/rails/issues/38285#issuecomment-806231980

@@ -11,8 +11,8 @@ module SaltEdge
       response = client.get("consents/#{consent_id}")
 
       {
-        consent_status: response['consentStatus'],
-        sca_redirect_link: response.dig('_links', 'scaRedirect', 'href')
+        consent_status: response["consentStatus"],
+        sca_redirect_link: response.dig("_links", "scaRedirect", "href")
       }
     end
   end

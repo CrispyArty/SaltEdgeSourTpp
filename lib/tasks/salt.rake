@@ -1,4 +1,4 @@
-require 'openssl'
+require "openssl"
 
 namespace :salt do
   def create_private_key(file_path)
@@ -15,7 +15,7 @@ namespace :salt do
     ca_cert_path = Rails.root.join("storage", "certificates", "ca_certificate.crt")
 
     if File.exist?(ca_cert_path)
-      puts 'CA Certificate already exists'
+      puts "CA Certificate already exists"
 
       next
     end
@@ -27,17 +27,17 @@ namespace :salt do
     # Create CA Certificate Signing Request
     cnf_path = Rails.root.join("config", "certificates", "ca_openssl.cnf")
     csr_path = Rails.root.join("storage", "certificates", "ca.csr")
-    system("openssl req -config #{cnf_path.to_s} -new -key #{private_key_path.to_s} -nodes -out #{csr_path.to_s}")
+    system("openssl req -config #{cnf_path} -new -key #{private_key_path} -nodes -out #{csr_path}")
 
     # Create CA Certificate
-    system("openssl x509 -signkey #{private_key_path.to_s} -in #{csr_path.to_s} -req -days 365 -out #{ca_cert_path.to_s}")
+    system("openssl x509 -signkey #{private_key_path} -in #{csr_path} -req -days 365 -out #{ca_cert_path}")
   end
 
   task create_cert: :environment do
     cert_path = Rails.root.join("storage", "certificates", "client_signed_certificate.crt")
 
     if File.exist?(cert_path)
-      puts 'Client Certificate already exists'
+      puts "Client Certificate already exists"
 
       next
     end
@@ -49,13 +49,13 @@ namespace :salt do
     # Create Certificate Signing Request
     cnf_path = Rails.root.join("config", "certificates", "client_openssl.cnf")
     csr_path = Rails.root.join("storage", "certificates", "client.csr")
-    system("openssl req -config #{cnf_path.to_s} -new -key #{private_key_path.to_s} -nodes -out #{csr_path.to_s}")
+    system("openssl req -config #{cnf_path} -new -key #{private_key_path} -nodes -out #{csr_path}")
 
     ca_cert_path = Rails.root.join("storage", "certificates", "ca_certificate.crt")
     ca_private_key_path = Rails.root.join("storage", "certificates", "ca_private.key")
 
     # Create Client Certificate
-    system("openssl x509 -req -days 360 -extfile #{cnf_path.to_s} -extensions cert_ext -in #{csr_path.to_s} -CAcreateserial -CA #{ca_cert_path.to_s} -CAkey #{ca_private_key_path} -out #{cert_path.to_s}")
+    system("openssl x509 -req -days 360 -extfile #{cnf_path} -extensions cert_ext -in #{csr_path} -CAcreateserial -CA #{ca_cert_path} -CAkey #{ca_private_key_path} -out #{cert_path}")
   end
 
   desc "Register tpp"
@@ -70,24 +70,23 @@ namespace :salt do
 
   desc "This task will create necessary certificate and will send it to tpp via api"
   task setup: :environment do
-    Rake::Task['salt:create_ca'].invoke
-    Rake::Task['salt:create_cert'].invoke
-    Rake::Task['salt:add_certificate'].invoke
+    Rake::Task["salt:create_ca"].invoke
+    Rake::Task["salt:create_cert"].invoke
+    Rake::Task["salt:add_certificate"].invoke
   end
 
-  # task verify_cert: :environment do
-  #   test_cert = ::File.read(Rails.root.join("storage", "certificates", "client_signed_certificate.crt").to_s)
-  #
-  #   response = Excon.post(
-  #     'https://priora.saltedge.com/api/tpp_verifiers/v2/certificates',
-  #     headers: {
-  #       "App-Id" => app_id,
-  #       "App-Secret" => secret_id
-  #     },
-  #     body: "{ data: { certificate: #{test_cert} } }"
-  #   )
-  #
-  #
-  #   p '--response', response, response.body
-  # end
+  task verify_cert: :environment do
+    test_cert = ::File.read(Rails.root.join("storage", "certificates", "client_signed_certificate.crt").to_s)
+
+    response = Excon.post(
+      "https://priora.saltedge.com/api/tpp_verifiers/v2/certificates",
+      headers: {
+        "App-Id" => app_id,
+        "App-Secret" => secret_id
+      },
+      body: "{ data: { certificate: #{test_cert} } }"
+    )
+
+    p "--response", response, response.body
+  end
 end

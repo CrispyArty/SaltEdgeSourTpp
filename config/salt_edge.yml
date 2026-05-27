@@ -1,9 +1,11 @@
 defaults: &defaults
-  base_uri: "https://priora.banksalt.com"
+  base_uri: "https://priora.saltedge.com"
   provider_code: "artea_sandbox"
 
 development:
   <<: *defaults
+  base_uri: "https://priora.banksalt.com"
+#  base_uri: "http://localhost:3000"
 
 test:
   <<: *defaults
