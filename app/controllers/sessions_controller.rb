@@ -1,9 +1,9 @@
-require 'securerandom'
+require "securerandom"
 
 class SessionsController < ApplicationController
   before_action :verify_guest!, except: :destroy
 
-  layout 'auth'
+  layout "auth"
 
   CreateSessionError = Class.new(StandardError)
   CreateConsentError = Class.new(StandardError)
@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
 
     consent = SaltEdge::ConsentShowService.call(consent_id: user[:consent_id])
 
-    raise CreateSessionError, "Consent status should be \"valid\", current: \"#{consent[:consent_status]}\"" unless consent[:consent_status] == 'valid'
+    raise CreateSessionError, "Consent status should be \"valid\", current: \"#{consent[:consent_status]}\"" unless consent[:consent_status] == "valid"
 
     sign_in(user[:consent_id])
 
@@ -60,6 +60,6 @@ class SessionsController < ApplicationController
   def render_session_error(exception)
     @exception = exception
 
-    render 'errors/session', layout: 'error', status: 422
+    render "errors/session", layout: "error", status: 422
   end
 end

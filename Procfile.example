@@ -1,0 +1,1 @@
+main: env RUBY_DEBUG_OPEN=true bin/rails server -p 1337

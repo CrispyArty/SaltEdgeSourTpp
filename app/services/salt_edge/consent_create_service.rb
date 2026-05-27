@@ -9,10 +9,10 @@ module SaltEdge
 
     def call
       response = client.post(
-        'consents',
+        "consents",
         headers: {
-          'TPP-Redirect-URI' => redirect_url,
-          'TPP-Redirect-Preferred' => 'true'
+          "TPP-Redirect-URI" => redirect_url,
+          "TPP-Redirect-Preferred" => "true"
         },
         data: {
           recurringIndicator: true,
@@ -25,8 +25,8 @@ module SaltEdge
       )
 
       {
-        consent_id: response['consentId'],
-        consent_status: response['consentStatus']
+        consent_id: response["consentId"],
+        consent_status: response["consentStatus"]
       }
     end
   end

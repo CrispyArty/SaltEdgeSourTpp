@@ -9,8 +9,8 @@ module SaltEdge
 
     def call
       data = client.get(
-        'accounts',
-        headers: { 'Consent-Id' => consent_id },
+        "accounts",
+        headers: { "Consent-Id" => consent_id },
         data: { withBalance: true }
       )
 

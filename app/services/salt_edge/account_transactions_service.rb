@@ -14,21 +14,21 @@ module SaltEdge
     def call
       data = client.get(
         "accounts/#{account_id}/transactions",
-        headers: { 'Consent-Id' => consent_id },
+        headers: { "Consent-Id" => consent_id },
         data: {
           paginated: paginated ? 1 : nil,
           limit: paginated ? limit : nil,
           offset: paginated ? offset : nil,
           dateFrom: 90.days.ago.utc.strftime("%Y-%m-%d"), # "2025-09-11"
-          dateTo: Time.now.utc.strftime("%Y-%m-%d"), #"2026-04-01"
+          dateTo: Time.now.utc.strftime("%Y-%m-%d"), # "2026-04-01"
           bookingStatus: "both"
         }.compact
       )
 
       data = data.with_indifferent_access
 
-      if paginated && data.dig('_links', 'next', 'href')
-        data = data.merge(next_page_params: extract_page_params(data.dig('_links', 'next', 'href')))
+      if paginated && data.dig("_links", "next", "href")
+        data = data.merge(next_page_params: extract_page_params(data.dig("_links", "next", "href")))
       end
 
       data
@@ -41,8 +41,8 @@ module SaltEdge
       query = Rack::Utils.parse_nested_query(uri.query)
 
       {
-        offset: query['offset'].to_i,
-        limit: query['limit'].to_i
+        offset: query["offset"].to_i,
+        limit: query["limit"].to_i
       }
     end
   end

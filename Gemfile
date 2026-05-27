@@ -45,7 +45,7 @@ group :development, :test do
 
   gem "overmind"
 
-  gem 'rspec-rails', '~> 8.0.0'
+  gem "rspec-rails", "~> 8.0.0"
 end
 
 group :development do
@@ -54,11 +54,10 @@ group :development do
 end
 
 group :test do
-  gem 'vcr'
-  gem 'webmock'
+  gem "vcr"
+  gem "webmock"
 end
 
-gem 'excon'
+gem "excon"
 gem "dotenv-rails"
 gem "slim-rails", "~> 4.0"
-
