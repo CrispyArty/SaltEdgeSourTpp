@@ -8,42 +8,34 @@ require "json"
 module SaltEdge
   class ClientService
     ApiError = Class.new(StandardError)
+    attr_reader :uri_builder, :auth
 
-    attr_reader :client
-
-    def initialize(uri_builder:)
+    def initialize(uri_builder:, auth: TppSignatureAuth.new)
       @uri_builder = uri_builder
+      @auth = auth
+    end
 
-      # TODO raise error if cert or private_key doesnt exists
-      @certfile = File.read(Rails.root.join("storage", "certificates", "client_signed_certificate.crt"))
-      @private_key = OpenSSL::PKey::RSA.new(File.read(Rails.root.join("storage", "certificates", "client_private.key")))
-      @tpp_signature_certificate = Base64.strict_encode64(@certfile)
-      @cert = OpenSSL::X509::Certificate.new(@certfile)
+    def build_url(path)
+      uri_builder.build(path)
     end
 
     def get(path, headers: {}, data: {})
-      # p "GETuri_builder.build(path)", uri_builder.build(path)
-      # return
-
       response = Excon.get(
-        uri_builder.build(path),
-        headers: generate_headers(headers),
+        build_url(path),
+        headers: auth.headers_for(headers),
         query: data
       )
 
       raise ApiError if response.status >= 500
 
-      JSON.parse(response.body)
+      ApiResult.new(status: response.status, headers: response.headers, body: response.body)
     end
 
     def post(path, headers: {}, data: {})
-      # p "POSTuri_builder.build(path)", uri_builder.build(path)
-      # return
-
       body = data.to_json
       response = Excon.post(
-        uri_builder.build(path),
-        headers: generate_headers(headers, body).merge({
+        build_url(path),
+        headers: auth.headers_for(headers, body: body).merge({
           "Content-Type" => "application/json"
         }),
         body: body
@@ -51,21 +43,31 @@ module SaltEdge
 
       raise ApiError if response.status >= 500
 
-      JSON.parse(response.body)
+      ApiResult.new(status: response.status, headers: response.headers, body: response.body)
+    end
+  end
+
+  class TppSignatureAuth
+    attr_accessor :cert, :tpp_signature_certificate, :certfile, :private_key
+
+    def initialize
+      # TODO raise error if cert or private_key doesnt exists
+      @certfile = File.read(Rails.root.join("storage", "certificates", "client_signed_certificate.crt"))
+      @private_key = OpenSSL::PKey::RSA.new(File.read(Rails.root.join("storage", "certificates", "client_private.key")))
+      @tpp_signature_certificate = Base64.strict_encode64(@certfile)
+      @cert = OpenSSL::X509::Certificate.new(@certfile)
     end
 
-    private
+    def headers_for(headers, body: "")
+      sign_headers, rest = separate_headers(headers)
 
-    attr_accessor :cert, :tpp_signature_certificate, :certfile, :private_key, :uri_builder
+      sign_headers = pre_headers(body).merge(sign_headers)
 
-    def generate_headers(headers, body = "")
-      sign, rest = separate_headers(headers)
-
-      sign_headers = pre_headers(body).merge(sign)
+      sign = signature(sign_headers)
 
       sign_headers.merge(
         "TPP-Signature-Certificate" => tpp_signature_certificate,
-        "Signature" => signature(sign_headers),
+        "Signature" => sign,
       ).merge(rest)
     end
 
@@ -108,6 +110,17 @@ module SaltEdge
       signature = Base64.strict_encode64(sign)
 
       "keyId=\"#{key_id}\",algorithm=\"#{algorithm}\",headers=\"#{header_keys}\",signature=\"#{signature}\""
+    end
+  end
+
+  class AppAuth
+    def initialize(app_id:, app_secret:)
+      @app_id = app_id
+      @app_secret = app_secret
+    end
+
+    def headers_for(headers, body: nil)
+      headers.merge("App-Id" => @app_id, "App-Secret" => @app_secret)
     end
   end
 end

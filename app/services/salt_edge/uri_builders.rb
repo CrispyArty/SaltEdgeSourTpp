@@ -2,39 +2,22 @@
 
 module SaltEdge
   module UriBuilders
-    class UriBuilder
-      attr_accessor :base_uri
-
-      def initialize(*, **)
-        @base_uri = Rails.configuration.salt_edge[:base_uri]
-      end
-
-      def build(_endpoint)
-        raise NotImplementedError
+    Template = Data.define(:pattern) do
+      def build(endpoint)
+        sprintf(pattern, endpoint: endpoint)
       end
     end
 
-    class Provider < UriBuilder
-      def initialize(provider:)
-        @provider = provider
-        super
-      end
-
-      def build(endpoint)
-        "#{base_uri}/#{@provider}/api/berlingroup/v1/#{endpoint}"
-      end
+    def self.provider(base_uri:, provider:)
+      Template.new(pattern: "#{base_uri}/#{provider}/api/berlingroup/v1/%{endpoint}")
     end
 
-    class Global < UriBuilder
-      def build(endpoint)
-        "#{base_uri}/api/berlingroup/v1/#{endpoint}"
-      end
+    def self.global(base_uri:)
+      Template.new(pattern: "#{base_uri}/api/berlingroup/v1/%{endpoint}")
     end
 
-    class Base < UriBuilder
-      def build(endpoint)
-        "#{base_uri}/api/#{endpoint}"
-      end
+    def self.base(base_uri:)
+      Template.new(pattern: "#{base_uri}/api/%{endpoint}")
     end
   end
 end
