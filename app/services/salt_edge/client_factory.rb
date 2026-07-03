@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module SaltEdge
-  # Pre-configured clients, one per auth scheme. Callers pick the right one per endpoint.
   class ClientFactory
     def self.with_provider
       build(

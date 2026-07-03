@@ -2,8 +2,6 @@
 
 module SaltEdge
   module Logging
-    # Decorates a sender: records a pending log (with the fully-built, signed request) BEFORE sending,
-    # then updates it with the response/error/duration afterwards.
     class Sender
       def initialize(inner:, logger: ApiRequestLogger.new)
         @inner = inner

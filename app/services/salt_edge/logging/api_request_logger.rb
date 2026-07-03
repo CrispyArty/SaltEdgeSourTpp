@@ -2,8 +2,6 @@
 
 module SaltEdge
   module Logging
-    # Two-phase persistence into ApiRequest: `start` creates a pending row before the request
-    # is sent, `complete` fills in the outcome (response or error) and clears the pending flag.
     class ApiRequestLogger
       def initialize(sink: ApiRequest)
         @sink = sink

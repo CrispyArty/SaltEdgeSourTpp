@@ -4,10 +4,12 @@ require "json"
 
 module SaltEdge
   module Http
-    # Facade over uri builder + auth + sender: `get`/`post` build and send in one call.
-    # `prepare` builds without sending — resolves the URL, JSON-encodes the body, and signs the
-    # headers — returning a plain RequestData (useful for inspecting the signed request).
+    # Facade
     class Client
+      extend Forwardable
+
+      def_delegator :sender, :call, :execute
+
       attr_reader :uri_builder, :auth, :sender
 
       def initialize(uri_builder:, auth: Strategies::TppSignatureAuth.new, sender: Sender.new)

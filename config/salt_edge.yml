@@ -8,7 +8,7 @@ defaults: &defaults
 development:
   <<: *defaults
   #  base_uri: "https://priora.banksalt.com"
-  base_uri: "http://localhost:3000"
+#  base_uri: "http://localhost:3000"
 #  tpp_verifier:
 #    app_id: "fi1MZGWp7rn4oLkKBL68vw"
 #    app_secret: "4flN119c28Uo4n0JvQ-Xzbq1PspXN4x3geaa2iLsE4U"

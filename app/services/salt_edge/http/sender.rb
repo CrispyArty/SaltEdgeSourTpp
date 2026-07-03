@@ -4,7 +4,6 @@ require "excon"
 
 module SaltEdge
   module Http
-    # The only object that performs HTTP. Reads a fully-built RequestData and returns an ApiResult.
     class Sender
       ApiError = Class.new(StandardError)
 

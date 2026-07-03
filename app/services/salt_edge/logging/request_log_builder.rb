@@ -2,8 +2,6 @@
 
 module SaltEdge
   module Logging
-    # Builds ApiRequest column payloads for the two logging phases: the pending row created
-    # before sending (full signed request) and the completion update (response or error).
     class RequestLogBuilder
       class << self
         def request_payload(data)
