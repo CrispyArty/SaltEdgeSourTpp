@@ -2,56 +2,39 @@
 
 module SaltEdge
   module Logging
+    # Builds ApiRequest column payloads for the two logging phases: the pending row created
+    # before sending (full signed request) and the completion update (response or error).
     class RequestLogBuilder
-      def initialize(method:, url:, started_at:, headers:, body:, response:, error:, duration_ms:)
-        @method = method
-        @url = url
-        @started_at = started_at
-        @headers = headers
-        @body = body
-        @response = response
-        @error = error
-        @duration_ms = duration_ms
-      end
+      class << self
+        def request_payload(data)
+          {
+            method: data.method.to_s.upcase,
+            url: data.url,
+            request_headers: data.headers,
+            request_body: parse_json(data.body)
+          }
+        end
 
-      def build
-        {
-          method: @method.to_s.upcase,
-          url: @url,
-          status: extract_status,
-          duration_ms: @duration_ms,
-          request_headers: @headers,
-          request_body: parse_json(@body),
-          response_headers: extract_response_headers,
-          response_body: extract_response_body,
-          error_class: @error&.class&.name,
-          error_message: @error&.message
-        }
-      end
+        def response_payload(response:, error:, duration_ms:)
+          {
+            status_code: response&.status,
+            duration_ms: duration_ms,
+            response_headers: response&.headers,
+            response_body: response&.body,
+            error_class: error&.class&.name,
+            error_message: error&.message
+          }
+        end
 
-      private
+        private
 
-      def extract_status
-        @response&.status
-      end
+        def parse_json(raw)
+          return nil if raw.nil? || raw.empty?
 
-      def extract_response_headers
-        @response&.headers
-      end
-
-      def extract_response_body
-        raw = @response&.body
-        return nil if raw.nil?
-
-        parse_json(raw) || raw
-      end
-
-      def parse_json(raw)
-        return nil if raw.nil? || raw.empty?
-
-        JSON.parse(raw)
-      rescue JSON::ParserError
-        nil
+          JSON.parse(raw)
+        rescue JSON::ParserError
+          nil
+        end
       end
     end
   end

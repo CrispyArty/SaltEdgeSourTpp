@@ -47,7 +47,7 @@ namespace :salt do
     # private_key = File.read(file_path)
 
     # Create Certificate Signing Request
-    cnf_path = Rails.root.join("config", "certificates", "client_openssl.cnf")
+    cnf_path = Rails.root.join("config", "certificates", "client_openssl_md1.cnf")
     csr_path = Rails.root.join("storage", "certificates", "client.csr")
     system("openssl req -config #{cnf_path} -new -key #{private_key_path} -nodes -out #{csr_path}")
 
@@ -55,7 +55,9 @@ namespace :salt do
     ca_private_key_path = Rails.root.join("storage", "certificates", "ca_private.key")
 
     # Create Client Certificate
-    system("openssl x509 -req -days 360 -extfile #{cnf_path} -extensions cert_ext -in #{csr_path} -CAcreateserial -CA #{ca_cert_path} -CAkey #{ca_private_key_path} -out #{cert_path}")
+    serial = SecureRandom.random_number(1 << 128)
+    # serial = "1234567890987654321"
+    system("openssl x509 -req -days 360 -extfile #{cnf_path} -extensions cert_ext -in #{csr_path} -set_serial #{serial} -CA #{ca_cert_path} -CAkey #{ca_private_key_path} -out #{cert_path}")
   end
 
   desc "Register tpp"

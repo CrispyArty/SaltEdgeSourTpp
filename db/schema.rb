@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_12_125859) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_22_072905) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,14 +20,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_12_125859) do
     t.string "error_class"
     t.text "error_message"
     t.string "method", null: false
+    t.boolean "pending", default: true, null: false
     t.jsonb "request_body"
     t.jsonb "request_headers"
     t.text "response_body"
     t.jsonb "response_headers"
-    t.integer "status"
+    t.integer "status_code"
     t.datetime "updated_at", null: false
     t.string "url", null: false
     t.index ["created_at"], name: "index_api_requests_on_created_at"
-    t.index ["status"], name: "index_api_requests_on_status"
+    t.index ["status_code"], name: "index_api_requests_on_status_code"
   end
 end
