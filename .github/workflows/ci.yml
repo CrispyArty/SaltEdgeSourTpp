@@ -41,6 +41,8 @@ jobs:
         run: |
           bin/rails db:create
           bin/rails db:schema:load
+      - name: Set up certificates
+        run: bin/rails salt:create_ca salt:create_cert
       # Add or replace test runners here
       - name: Run tests
         run: bundle exec rspec --fail-fast --order random
@@ -51,7 +53,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
+        uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b #v1.321.0
         with:
           ruby-version: 3.4.4
           bundler-cache: true
