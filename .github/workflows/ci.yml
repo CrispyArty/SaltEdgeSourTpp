@@ -6,8 +6,6 @@
 # run tests and linters.
 name: "Ruby on Rails CI"
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 jobs:
