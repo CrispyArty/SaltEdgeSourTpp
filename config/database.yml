@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("POSTGRES_HOST") { "localhost" } %>
+  username: <%= ENV.fetch("POSTGRES_USERNAME") { "user" } %>
+  password: <%= ENV.fetch("POSTGRES_USER_PASSWORD") { "" } %>
+
+development:
+  <<: *default
+  database: sour_tpp_development
+
+test:
+  <<: *default
+  database: sour_tpp_test
+
+production:
+  <<: *default
+  database: sour_tpp_production
+  username: <%= ENV["POSTGRES_USERNAME"] %>
+  password: <%= ENV["POSTGRES_USER_PASSWORD"] %>

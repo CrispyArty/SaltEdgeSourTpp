@@ -1,0 +1,21 @@
+defaults: &defaults
+  base_uri: "https://priora.saltedge.com"
+  provider_code: "artea_sandbox"
+  tpp_verifier:
+    app_id: "wirecard_test_id"
+    app_secret: "wirecard_test_secret"
+
+development:
+  <<: *defaults
+  #  base_uri: "https://priora.banksalt.com"
+  base_uri: "http://localhost:3000"
+#  tpp_verifier:
+#    app_id: "fi1MZGWp7rn4oLkKBL68vw"
+#    app_secret: "4flN119c28Uo4n0JvQ-Xzbq1PspXN4x3geaa2iLsE4U"
+
+test:
+  <<: *defaults
+#  base_uri: "https://example.com"
+
+production:
+  <<: *defaults

@@ -25,6 +25,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/salt_edge.yml
 
 # Ignore all environment files.
 /.env*
@@ -40,6 +41,7 @@ yarn-debug.log*
 /coverage
 .vscode
 .vs
+.claude
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
