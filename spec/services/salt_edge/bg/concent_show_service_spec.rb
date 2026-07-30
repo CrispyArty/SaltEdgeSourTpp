@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe ::SaltEdge::ConsentShowService do
+describe ::SaltEdge::BG::ConsentShowService do
   context "with expired consent", vcr: { cassette_name: 'salt_edge/consent_show/rejected_no_redirect_link' } do
     it 'returns rejected consentStatus and no link' do
       result = described_class.call(consent_id: '385716')

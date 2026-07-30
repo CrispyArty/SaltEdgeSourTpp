@@ -2,7 +2,17 @@ module SaltEdge
   class TppVerifierService < ApplicationService
     attr_reader :client
 
-    def initialize(client: ClientFactory.base)
+    config = Rails.configuration.salt_edge
+    CLIENT = ApiClient::Client.new(
+      uri_builder: ApiClient::UriBuilders.base(base_uri: config[:base_uri]),
+      auth: ApiClient::Strategies::AppAuth.new(
+        app_id: config[:tpp_verifier][:app_id],
+        app_secret: config[:tpp_verifier][:app_secret]
+      ),
+      sender: ApiClient::Logging::Sender.new(inner: ApiClient::Sender.new, logger: ApiClient::Logging::ApiRequestLogger.new)
+    )
+
+    def initialize(client: CLIENT)
       @client = client
     end
 

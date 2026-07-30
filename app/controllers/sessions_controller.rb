@@ -18,8 +18,8 @@ class SessionsController < ApplicationController
     Rails.application.routes.default_url_options[:host] = request.host
     uuid = SecureRandom.uuid
 
-    create_response = ::SaltEdge::ConsentCreateService.call(redirect_url: sessions_create_url(uuid: uuid))
-    show_response = ::SaltEdge::ConsentShowService.call(consent_id: create_response[:consent_id])
+    create_response = SaltEdge::BG::ConsentCreateService.call(redirect_url: sessions_create_url(uuid: uuid))
+    show_response = SaltEdge::BG::ConsentShowService.call(consent_id: create_response[:consent_id])
 
     Rails.cache.write("user:#{uuid}:consent_creation", { consent_id: create_response[:consent_id] })
     raise CreateConsentError, "Redirect not found!" unless show_response[:sca_redirect_link].present?
@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
 
     raise CreateSessionError, "Missing saved consent" unless user.present?
 
-    consent = SaltEdge::ConsentShowService.call(consent_id: user[:consent_id])
+    consent = SaltEdge::BG::ConsentShowService.call(consent_id: user[:consent_id])
 
     raise CreateSessionError, "Consent status should be \"valid\", current: \"#{consent[:consent_status]}\"" unless consent[:consent_status] == "valid"
 

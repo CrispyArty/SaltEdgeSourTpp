@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe ::SaltEdge::AccountTransactionsService do
+describe ::SaltEdge::BG::AccountTransactionsService do
   include ActiveSupport::Testing::TimeHelpers
   let(:target_time) { Time.zone.parse("2026-04-07 12:00:00") }
 

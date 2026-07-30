@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module SaltEdge
+module ApiClient
   module Logging
     class Sender
       def initialize(inner:, logger: ApiRequestLogger.new)
@@ -37,7 +37,7 @@ module SaltEdge
       def guard
         yield
       rescue StandardError => e
-        Rails.logger.error("[SaltEdge::LoggingSender] logging failed: #{e.class}: #{e.message}")
+        Rails.logger.error("[ApiClient::LoggingSender] logging failed: #{e.class}: #{e.message}")
         nil
       end
 

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module SaltEdge
-  module Http
+  module BG
     module Strategies
       class TppSignatureAuth
         attr_reader :cert, :private_key
 
-        def initialize(credentials: CertCredentials.default)
+        def initialize(credentials: ApiClient::CertCredentials.default)
           @private_key = credentials.private_key
           @cert = credentials.cert
         end

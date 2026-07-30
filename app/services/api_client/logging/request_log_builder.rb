@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module SaltEdge
+module ApiClient
   module Logging
     class RequestLogBuilder
       class << self

@@ -42,6 +42,7 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.configure_rspec_metadata!
   config.ignore_localhost = true
+  config.default_cassette_options = { match_requests_on: %i[method path query] }
 end
 
 RSpec.configure do |config|

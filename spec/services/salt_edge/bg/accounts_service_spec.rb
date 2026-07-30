@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe ::SaltEdge::AccountsService do
+describe ::SaltEdge::BG::AccountsService do
   context "with existing accounts", vcr: { cassette_name: 'salt_edge/accounts/success_with_balances' } do
     it 'returns accounts with balances' do
       result = described_class.call(consent_id: '385730')
