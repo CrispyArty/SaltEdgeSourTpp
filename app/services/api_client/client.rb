@@ -11,7 +11,7 @@ module ApiClient
 
     attr_reader :uri_builder, :auth, :sender
 
-    def initialize(uri_builder:, auth: Strategies::TppSignatureAuth.new, sender: Sender.new)
+    def initialize(uri_builder:, auth: nil, sender: Sender.new)
       @uri_builder = uri_builder
       @auth = auth
       @sender = sender
@@ -40,19 +40,24 @@ module ApiClient
 
       case method
       when :get
+        headers = auth&.headers_for(headers) || headers
+
         RequestData.new(
           method: :get,
           url: url,
-          headers: auth.headers_for(headers),
+          headers: headers,
           query: data,
           body: nil
         )
       when :post
         body = data.to_json
+
+        headers = auth&.headers_for(headers, body: body) || headers
+
         RequestData.new(
           method: :post,
           url: url,
-          headers: auth.headers_for(headers, body: body).merge("Content-Type" => "application/json"),
+          headers: headers.merge("Content-Type" => "application/json"),
           query: {},
           body: body
         )

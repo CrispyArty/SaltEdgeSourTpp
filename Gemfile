@@ -61,3 +61,5 @@ end
 gem "excon"
 gem "dotenv-rails"
 gem "slim-rails", "~> 4.0"
+
+gem "jwt", "~> 3.2"

@@ -1,5 +1,5 @@
 module SaltEdge
-  module BG
+  module OB
     class AddCertificateService < ApplicationService
       attr_reader :client
 
@@ -9,9 +9,12 @@ module SaltEdge
 
       def call
         client.post("tpp/certificates", data: {
-          certificate: {
-            name: "Sour Point certificate BG",
-            type: "qseal"
+          data: {
+            certificate: {
+              pem: ApiClient::CertCredentials.obseal.cert.to_pem,
+              name: "Sour Point certificate OB",
+              type: "obseal"
+            }
           }
         })
       end

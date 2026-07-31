@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-     resources :users, only: [ :index, :show, :create ]
+    resources :users, only: [ :index, :show, :create ]
+    resource :callback, only: [] do
+      get :success
+    end
   end
 
   get "dashboard" => "dashboard#index"

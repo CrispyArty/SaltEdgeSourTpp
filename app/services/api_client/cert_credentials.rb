@@ -4,10 +4,17 @@ module ApiClient
   class CertCredentials
     MissingError = Class.new(StandardError)
 
-    def self.default
+    def self.qseal
       @default ||= load(
-        cert_path: Rails.root.join("storage/certificates/client_signed_certificate.crt"),
-        key_path: Rails.root.join("storage/certificates/client_private.key")
+        cert_path: Rails.root.join("storage/certificates/cert_qseal.pem"),
+        key_path: Rails.root.join("storage/certificates/cert_qseal.key")
+      )
+    end
+
+    def self.obseal
+      @default ||= load(
+        cert_path: Rails.root.join("storage/certificates/cert_obseal.pem"),
+        key_path: Rails.root.join("storage/certificates/cert_obseal.key")
       )
     end
 
