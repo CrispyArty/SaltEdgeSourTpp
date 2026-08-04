@@ -17,12 +17,12 @@ module ApiClient
       @sender = sender
     end
 
-    def get(path, headers: {}, data: {})
-      sender.call(prepare(:get, path, headers: headers, data: data))
+    def get(path, headers: {}, query: {})
+      sender.call(prepare(:get, path, headers: headers, data: query))
     end
 
-    def post(path, headers: {}, data: {})
-      sender.call(prepare(:post, path, headers: headers, data: data))
+    def post(path, headers: {}, body: {})
+      sender.call(prepare(:post, path, headers: headers, data: body))
     end
 
     def prepare(method, path, headers: {}, data: {})

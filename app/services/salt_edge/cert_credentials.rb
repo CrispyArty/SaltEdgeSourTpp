@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ApiClient
+module SaltEdge
   class CertCredentials
     MissingError = Class.new(StandardError)
 

@@ -3,21 +3,26 @@
 module SaltEdge
   module OB
     class ClientFactory
+      def self.base
+        build(
+          UriBuilders.global(base_uri: config[:base_uri], provider: provider),
+        )
+      end
+
       def self.global
         build(
-          nil,
-          uri_builder: UriBuilders.global(base_uri: config[:base_uri])
+          UriBuilders.global(base_uri: config[:base_uri], provider: provider),
+          auth: Strategies::ClientCredentialsAuth.new
         )
       end
 
       def self.token
         build(
-          nil,
-          uri_builder: UriBuilders.token(base_uri: config[:base_uri], provider: "demo_bank_ob_uk")
+          UriBuilders.token(base_uri: config[:base_uri], provider: provider)
         )
       end
 
-      def self.build(auth, uri_builder:)
+      def self.build(uri_builder, auth: nil)
         ApiClient::Client.new(
           uri_builder: uri_builder,
           auth: auth,
@@ -28,8 +33,14 @@ module SaltEdge
         )
       end
 
+      private
+
       def self.config
         Rails.configuration.salt_edge
+      end
+
+      def self.provider
+        "demo_bank_ob_v3_dot1_dot11_uk_sandbox"
       end
     end
   end

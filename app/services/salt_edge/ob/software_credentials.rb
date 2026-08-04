@@ -2,7 +2,7 @@
 
 module SaltEdge
   module OB
-    class ClientCredentials
+    class SoftwareCredentials
       def self.default
         @default ||= new(
           app_id: Rails.configuration.salt_edge[:tpp_client][:app_id],

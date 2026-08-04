@@ -11,7 +11,7 @@ module SaltEdge
         client.post("tpp/certificates", data: {
           data: {
             certificate: {
-              pem: ApiClient::CertCredentials.obseal.cert.to_pem,
+              pem: CertCredentials.obseal.cert.to_pem,
               name: "Sour Point certificate OB",
               type: "obseal"
             }

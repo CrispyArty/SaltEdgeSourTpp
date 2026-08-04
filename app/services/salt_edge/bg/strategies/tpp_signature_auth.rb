@@ -6,7 +6,7 @@ module SaltEdge
       class TppSignatureAuth
         attr_reader :cert, :private_key
 
-        def initialize(credentials: ApiClient::CertCredentials.qseal)
+        def initialize(credentials: CertCredentials.qseal)
           @private_key = credentials.private_key
           @cert = credentials.cert
         end
