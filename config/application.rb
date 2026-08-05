@@ -18,7 +18,9 @@ require "action_view/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module SaltEdgeSourTpp
+require_relative "settings"
+
+module SourTpp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.1
@@ -39,7 +41,6 @@ module SaltEdgeSourTpp
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-
-    config.salt_edge = config_for(:salt_edge)
+    config.salt_edge = Settings.new(config_for(:salt_edge))
   end
 end

@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 module SaltEdge
-  module OB
+  module BG
     module UriBuilders
       def self.provider(base_uri:, provider:)
         ApiClient::UriBuilders::Template.new(
-          pattern: "#{base_uri}/api/#{provider}/open-banking/v3.1.11/%{endpoint}"
+          pattern: "#{base_uri}/#{provider}/api/berlingroup/v1/%{endpoint}"
         )
       end
 
-      def self.oidc(base_uri:, provider:)
+      def self.global(base_uri:)
         ApiClient::UriBuilders::Template.new(
-          pattern: "#{base_uri}/api/oidc/#{provider}/%{endpoint}"
+          pattern: "#{base_uri}/api/berlingroup/v1/%{endpoint}"
         )
       end
     end

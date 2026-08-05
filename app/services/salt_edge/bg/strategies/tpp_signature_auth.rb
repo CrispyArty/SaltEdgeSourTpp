@@ -11,7 +11,7 @@ module SaltEdge
           @cert = credentials.cert
         end
 
-        def headers_for(headers, body: "")
+        def headers_for(headers, body: nil)
           sign_headers, rest = separate_headers(headers)
 
           sign_headers = pre_headers(body).merge(sign_headers)
@@ -29,7 +29,7 @@ module SaltEdge
         def pre_headers(body)
           {
             "X-Request-ID" => SecureRandom.uuid,
-            "Digest" => digest(body),
+            "Digest" => digest(body || ""),
             "Date" => Time.now.utc.httpdate
           }
         end

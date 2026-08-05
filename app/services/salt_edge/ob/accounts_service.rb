@@ -2,7 +2,8 @@
 
 module SaltEdge
   module OB
-    class AccountsService < ApplicationService
+    class AccountsService
+      extend Callable
       attr_reader :client, :access_token
 
       def initialize(access_token:, client: ClientFactory.base)

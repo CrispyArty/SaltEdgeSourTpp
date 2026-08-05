@@ -14,4 +14,5 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "BG" # BerlinGroup
   inflect.acronym "OB" # OpenBanking
+  inflect.acronym "JWT"
 end

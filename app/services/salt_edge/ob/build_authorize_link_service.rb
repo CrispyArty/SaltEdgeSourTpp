@@ -2,21 +2,24 @@
 
 module SaltEdge
   module OB
-    class BuildAuthorizeLinkService < ApplicationService
-      attr_reader :consent_id, :software_credentials, :cert_credentials, :redirect, :scope, :state, :nonce
+    class BuildAuthorizeLinkService
+      extend Callable
+      attr_reader :consent_id, :software_credentials, :cert_credentials, :redirect, :scope, :state, :nonce, :provider
 
       def initialize(
         consent_id:,
+        provider: SaltEdge::Provider.ob,
         software_credentials: SoftwareCredentials.default,
         cert_credentials: CertCredentials.obseal
       )
         @consent_id = consent_id
         @software_credentials = software_credentials
         @cert_credentials = cert_credentials
-        @redirect = "http://localhost:3000/api/callback/success"
+        @redirect = Rails.configuration.salt_edge[:ob_callback_url]
         @scope = "openid accounts"
         @state = SecureRandom.hex(16)
         @nonce = SecureRandom.hex(16)
+        @provider = provider
       end
 
       def call
@@ -40,7 +43,7 @@ module SaltEdge
           {
             iss: software_credentials.app_id,
             client_id: software_credentials.app_id,
-            aud: "https://priora.banksalt.com/", # well-known "issuer"
+            aud: Rails.configuration.salt_edge[:base_uri], # well-known "issuer"
             response_type: "code",
             redirect_uri: redirect,
             scope: scope,
@@ -52,7 +55,7 @@ module SaltEdge
                 openbanking_intent_id: { value: consent_id, essential: true },
                 acr: {
                   essential: true,
-                  values: [ "urn:openbanking:psd2:sca", "urn:openbanking:psd2:ca" ]
+                  values: %w[urn:openbanking:psd2:sca urn:openbanking:psd2:ca]
                 }
               }
             }

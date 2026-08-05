@@ -1,6 +1,7 @@
 module SaltEdge
   module BG
-    class AccountsService < ApplicationService
+    class AccountsService
+      extend Callable
       attr_reader :consent_id, :client
 
       def initialize(consent_id:, client: ClientFactory.with_provider)
@@ -12,7 +13,7 @@ module SaltEdge
         data = client.get(
           "accounts",
           headers: { "Consent-Id" => consent_id },
-          data: { withBalance: true }
+          query: { withBalance: true }
         )
 
         data.with_indifferent_access

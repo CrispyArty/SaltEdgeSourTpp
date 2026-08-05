@@ -1,6 +1,7 @@
 module SaltEdge
   module BG
-    class ConsentCreateService < ApplicationService
+    class ConsentCreateService
+      extend Callable
       attr_reader :redirect_url, :client
 
       def initialize(redirect_url:, client: ClientFactory.with_provider)
@@ -15,7 +16,7 @@ module SaltEdge
             "TPP-Redirect-URI" => redirect_url,
             "TPP-Redirect-Preferred" => "true"
           },
-          data: {
+          query: {
             recurringIndicator: true,
             frequencyPerDay: 4,
             validUntil: 30.days.from_now.utc.strftime("%Y-%m-%d"), # "2026-04-30"

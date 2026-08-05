@@ -1,6 +1,7 @@
 module SaltEdge
   module BG
-    class AccountTransactionsService < ApplicationService
+    class AccountTransactionsService
+      extend Callable
       attr_reader :consent_id, :account_id, :client, :paginated, :limit, :offset
 
       def initialize(account_id:, consent_id:, paginated: false, limit: 50, offset: 0, client: ClientFactory.with_provider)
@@ -16,7 +17,7 @@ module SaltEdge
         data = client.get(
           "accounts/#{account_id}/transactions",
           headers: { "Consent-Id" => consent_id },
-          data: {
+          query: {
             paginated: paginated ? 1 : nil,
             limit: paginated ? limit : nil,
             offset: paginated ? offset : nil,

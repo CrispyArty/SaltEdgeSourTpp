@@ -18,52 +18,36 @@ module ApiClient
     end
 
     def get(path, headers: {}, query: {})
-      sender.call(prepare(:get, path, headers: headers, data: query))
+      sender.call(prepare(:get, path, headers: headers, query: query))
     end
 
     def post(path, headers: {}, body: {})
-      sender.call(prepare(:post, path, headers: headers, data: body))
+      sender.call(prepare(:post, path, headers: headers, body: body))
     end
 
-    def prepare(method, path, headers: {}, data: {})
-      build_data(method, path, headers, data)
+    def prepare(method, path, headers: {}, query: {}, body: {})
+      build_data(method, path, headers, query, body)
     end
 
     private
 
-    def build_url(path)
-      uri_builder.build(path)
-    end
+    def build_data(method, path, headers, query, body: nil)
+      url = uri_builder.build(path)
 
-    def build_data(method, path, headers, data)
-      url = build_url(path)
+      headers = auth&.headers_for(headers, body: body) || headers
 
-      case method
-      when :get
-        headers = auth&.headers_for(headers) || headers
-
-        RequestData.new(
-          method: :get,
-          url: url,
-          headers: headers,
-          query: data,
-          body: nil
-        )
-      when :post
-        body = data.to_json
-
-        headers = auth&.headers_for(headers, body: body) || headers
-
-        RequestData.new(
-          method: :post,
-          url: url,
-          headers: headers.merge("Content-Type" => "application/json"),
-          query: {},
-          body: body
-        )
-      else
-        raise ArgumentError, "unsupported method: #{method.inspect}"
+      if method == :post && body.is_a?(Hash)
+        headers = headers.merge("Content-Type" => "application/json")
+        body = body.to_json
       end
+
+      RequestData.new(
+        method: method,
+        url: url,
+        headers: headers,
+        query: query,
+        body: body
+      )
     end
   end
 end

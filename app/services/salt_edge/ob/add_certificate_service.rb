@@ -1,14 +1,15 @@
 module SaltEdge
   module OB
-    class AddCertificateService < ApplicationService
+    class AddCertificateService
+      extend Callable
       attr_reader :client
 
-      def initialize(client: ClientFactory.global)
+      def initialize(client: ClientFactory.regular)
         @client = client
       end
 
       def call
-        client.post("tpp/certificates", data: {
+        client.post("tpp/certificates", body: {
           data: {
             certificate: {
               pem: CertCredentials.obseal.cert.to_pem,

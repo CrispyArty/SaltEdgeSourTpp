@@ -1,6 +1,7 @@
 module SaltEdge
   module BG
-    class ConsentShowService < ApplicationService
+    class ConsentShowService
+      extend Callable
       attr_reader :consent_id, :client
 
       def initialize(consent_id:, client: ClientFactory.with_provider)

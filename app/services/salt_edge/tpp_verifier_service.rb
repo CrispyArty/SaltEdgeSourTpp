@@ -1,5 +1,7 @@
 module SaltEdge
-  class TppVerifierService < ApplicationService
+  class TppVerifierService
+    extend Callable
+
     attr_reader :client
 
     config = Rails.configuration.salt_edge
@@ -21,7 +23,7 @@ module SaltEdge
 
       response = client.post(
         "tpp_verifiers/v2/certificates",
-        data: {
+        body: {
           data: {
             certificate: test_cert
           }

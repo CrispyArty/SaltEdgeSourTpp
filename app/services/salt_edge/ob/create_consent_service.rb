@@ -1,9 +1,10 @@
 module SaltEdge
   module OB
-    class CreateConsentService < ApplicationService
+    class CreateConsentService
+      extend Callable
       attr_reader :client
 
-      def initialize(client: ClientFactory.global)
+      def initialize(client: ClientFactory.regular)
         @client = client
       end
 

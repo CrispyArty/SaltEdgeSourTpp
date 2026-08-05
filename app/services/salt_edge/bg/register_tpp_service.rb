@@ -1,6 +1,7 @@
 module SaltEdge
   module BG
-    class RegisterTppService < ApplicationService
+    class RegisterTppService
+      extend Callable
       attr_reader :client
 
       def initialize(client: ClientFactory.global)
@@ -8,7 +9,7 @@ module SaltEdge
       end
 
       def call
-        client.post("tpp/register", data: {
+        client.post("tpp/register", body: {
           company: {
             address: "Test address",
             email: "artiom.teleshman@saltedge.com",

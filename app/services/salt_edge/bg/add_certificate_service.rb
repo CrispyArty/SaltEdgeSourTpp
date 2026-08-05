@@ -1,6 +1,7 @@
 module SaltEdge
   module BG
-    class AddCertificateService < ApplicationService
+    class AddCertificateService
+      extend Callable
       attr_reader :client
 
       def initialize(client: ClientFactory.global)
@@ -8,7 +9,7 @@ module SaltEdge
       end
 
       def call
-        client.post("tpp/certificates", data: {
+        client.post("tpp/certificates", body: {
           certificate: {
             name: "Sour Point certificate BG",
             type: "qseal"

@@ -3,22 +3,22 @@
 module SaltEdge
   module OB
     class ClientFactory
-      def self.base
+      def self.base(provider = SaltEdge::Provider.ob)
         build(
-          UriBuilders.global(base_uri: config[:base_uri], provider: provider),
+          UriBuilders.provider(base_uri: config[:base_uri], provider: provider.code),
         )
       end
 
-      def self.global
+      def self.regular(provider = SaltEdge::Provider.ob)
         build(
-          UriBuilders.global(base_uri: config[:base_uri], provider: provider),
+          UriBuilders.provider(base_uri: config[:base_uri], provider: provider.code),
           auth: Strategies::ClientCredentialsAuth.new
         )
       end
 
-      def self.token
+      def self.oidc(provider = SaltEdge::Provider.ob)
         build(
-          UriBuilders.token(base_uri: config[:base_uri], provider: provider)
+          UriBuilders.oidc(base_uri: config[:base_uri], provider: provider.code)
         )
       end
 
@@ -37,10 +37,6 @@ module SaltEdge
 
       def self.config
         Rails.configuration.salt_edge
-      end
-
-      def self.provider
-        "demo_bank_ob_v3_dot1_dot11_uk_sandbox"
       end
     end
   end

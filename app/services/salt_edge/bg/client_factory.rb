@@ -3,12 +3,12 @@
 module SaltEdge
   module BG
     class ClientFactory
-      def self.with_provider
+      def self.with_provider(provider = SaltEdge::Provider.bg)
         build(
           Strategies::TppSignatureAuth.new,
-          uri_builder: ApiClient::UriBuilders.provider(
+          uri_builder: UriBuilders.provider(
             base_uri: config[:base_uri],
-            provider: config[:provider_code]
+            provider: provider.code
           )
         )
       end
@@ -16,17 +16,7 @@ module SaltEdge
       def self.global
         build(
           Strategies::TppSignatureAuth.new,
-          uri_builder: ApiClient::UriBuilders.global(base_uri: config[:base_uri])
-        )
-      end
-
-      def self.base
-        build(
-          Strategies::AppAuth.new(
-            app_id: config[:tpp_verifier][:app_id],
-            app_secret: config[:tpp_verifier][:app_secret]
-          ),
-          uri_builder: ApiClient::UriBuilders.base(base_uri: config[:base_uri])
+          uri_builder: UriBuilders.global(base_uri: config[:base_uri])
         )
       end
 
