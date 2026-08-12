@@ -25,18 +25,18 @@ module ApiClient
       sender.call(prepare(:post, path, headers: headers, body: body))
     end
 
-    def prepare(method, path, headers: {}, query: {}, body: {})
+    def prepare(method, path, headers: {}, query: {}, body: nil)
       build_data(method, path, headers, query, body)
     end
 
     private
 
-    def build_data(method, path, headers, query, body: nil)
+    def build_data(method, path, headers, query, body = nil)
       url = uri_builder.build(path)
 
-      headers = auth&.headers_for(headers, body: body) || headers
+      headers = auth&.headers_for(headers, body) || headers
 
-      if method == :post && body.is_a?(Hash)
+      if body.is_a?(Hash)
         headers = headers.merge("Content-Type" => "application/json")
         body = body.to_json
       end

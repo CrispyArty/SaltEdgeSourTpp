@@ -1,17 +1,18 @@
+# frozen_string_literal: true
+
 module SaltEdge
   module BG
-    class AccountTransactionsService
+    AccountTransactionsEndpoint = ::Data.define(:account_id, :consent_id, :paginated, :limit, :offset, :client) do
       extend Callable
-      attr_reader :consent_id, :account_id, :client, :paginated, :limit, :offset
 
-      def initialize(account_id:, consent_id:, paginated: false, limit: 50, offset: 0, client: ClientFactory.with_provider)
-        @account_id = account_id
-        @consent_id = consent_id
-        @client = client
-        @paginated = paginated
-        @limit = limit
-        @offset = offset
-      end
+      def initialize(
+        account_id:,
+        consent_id:,
+        paginated: false,
+        limit: 50,
+        offset: 0,
+        client: ClientFactory.with_provider
+      ) = super
 
       def call
         data = client.get(

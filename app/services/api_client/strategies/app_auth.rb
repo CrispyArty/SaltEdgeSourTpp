@@ -8,7 +8,7 @@ module ApiClient
         @app_secret = app_secret
       end
 
-      def headers_for(headers, body: nil)
+      def headers_for(headers, _body = nil)
         headers.merge("App-Id" => @app_id, "App-Secret" => @app_secret)
       end
     end

@@ -7,7 +7,7 @@ class AccountsController < ApplicationController
 
     @offset = 0 if @offset < 0
 
-    data = SaltEdge::BG::AccountTransactionsService.call(
+    data = SaltEdge::BG::AccountTransactionsEndpoint.call(
       account_id: params[:id],
       consent_id: current_user[:consent_id],
       paginated: true,

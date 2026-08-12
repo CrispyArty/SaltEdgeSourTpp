@@ -4,7 +4,7 @@ class CreateApiRequests < ActiveRecord::Migration[8.1]
       t.string :method, null: false
       t.string :url, null: false
       t.integer :status_code
-      t.boolean :pending, default: false
+      t.boolean :pending, default: false, null: false
       t.float :duration_ms
       t.jsonb :request_headers
       t.jsonb :request_body

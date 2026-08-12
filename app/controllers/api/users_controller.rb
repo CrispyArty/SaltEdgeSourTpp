@@ -18,7 +18,7 @@ module Api
 
     def user_params
       # This looks for the 'user' key that Rails automatically created for you
-      params.require(:user).permit(:name, :email1)
+      params.expect(user: [ :name, :email1 ])
     end
   end
 end

@@ -25,6 +25,6 @@ module AuthenticationConcern
   end
 
   def authenticate_user!
-    redirect_to sign_in_path, alert: "You need to sign in first" unless current_user.present?
+    redirect_to sign_in_path, alert: "You need to sign in first" if current_user.blank?
   end
 end

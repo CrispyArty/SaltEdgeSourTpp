@@ -24,7 +24,13 @@ module SaltEdge
         ApiClient::Client.new(
           uri_builder: uri_builder,
           auth: auth,
-          sender: ApiClient::Logging::Sender.new(inner: ApiClient::Sender.new, logger: ApiClient::Logging::ApiRequestLogger.new)
+          sender: ApiClient::Errors::Sender.new(
+            inner: ApiClient::Logging::Sender.new(
+              inner: ApiClient::Sender.new,
+              logger: ApiClient::Logging::ApiRequestLogger.new
+            ),
+            error_parser: ErrorParser.new
+          )
         )
       end
 

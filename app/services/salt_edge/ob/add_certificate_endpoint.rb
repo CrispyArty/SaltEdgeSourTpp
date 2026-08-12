@@ -1,12 +1,11 @@
+# frozen_string_literal: true
+
 module SaltEdge
   module OB
-    class AddCertificateService
+    AddCertificateEndpoint = ::Data.define(:client) do
       extend Callable
-      attr_reader :client
 
-      def initialize(client: ClientFactory.regular)
-        @client = client
-      end
+      def initialize(client: ClientFactory.base) = super
 
       def call
         client.post("tpp/certificates", body: {

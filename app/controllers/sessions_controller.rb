@@ -18,11 +18,11 @@ class SessionsController < ApplicationController
     Rails.application.routes.default_url_options[:host] = request.host
     uuid = SecureRandom.uuid
 
-    create_response = SaltEdge::BG::ConsentCreateService.call(redirect_url: sessions_create_url(uuid: uuid))
-    show_response = SaltEdge::BG::ConsentShowService.call(consent_id: create_response[:consent_id])
+    create_response = SaltEdge::BG::ConsentCreateEndpoint.call(redirect_url: sessions_create_url(uuid: uuid))
+    show_response = SaltEdge::BG::ConsentShowEndpoint.call(consent_id: create_response[:consent_id])
 
     Rails.cache.write("user:#{uuid}:consent_creation", { consent_id: create_response[:consent_id] })
-    raise CreateConsentError, "Redirect not found!" unless show_response[:sca_redirect_link].present?
+    raise CreateConsentError, "Redirect not found!" if show_response[:sca_redirect_link].blank?
 
     redirect_to show_response[:sca_redirect_link], allow_other_host: true
 
@@ -32,11 +32,12 @@ class SessionsController < ApplicationController
   def create
     user = Rails.cache.fetch("user:#{params[:uuid]}:consent_creation")
 
-    raise CreateSessionError, "Missing saved consent" unless user.present?
+    raise CreateSessionError, "Missing saved consent" if user.blank?
 
-    consent = SaltEdge::BG::ConsentShowService.call(consent_id: user[:consent_id])
+    consent = SaltEdge::BG::ConsentShowEndpoint.call(consent_id: user[:consent_id])
 
-    raise CreateSessionError, "Consent status should be \"valid\", current: \"#{consent[:consent_status]}\"" unless consent[:consent_status] == "valid"
+    raise CreateSessionError,
+      "Consent status should be \"valid\", current: \"#{consent[:consent_status]}\"" unless consent[:consent_status] == "valid"
 
     sign_in(user[:consent_id])
 
@@ -60,6 +61,6 @@ class SessionsController < ApplicationController
   def render_session_error(exception)
     @exception = exception
 
-    render "errors/session", layout: "error", status: 422
+    render "errors/session", layout: "error", status: :unprocessable_content
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe ::SaltEdge::BG::AccountTransactionsService do
+describe ::SaltEdge::BG::AccountTransactionsEndpoint do
   include ActiveSupport::Testing::TimeHelpers
   let(:target_time) { Time.zone.parse("2026-04-07 12:00:00") }
 
@@ -22,7 +22,8 @@ describe ::SaltEdge::BG::AccountTransactionsService do
     end
   end
 
-  context "with paginator at first page", vcr: { cassette_name: 'salt_edge/accounts/transactions/success_with_pagination' } do
+  context "with paginator at first page",
+    vcr: { cassette_name: 'salt_edge/accounts/transactions/success_with_pagination' } do
     it 'returns list of transactions with next page link' do
       result = described_class.call(consent_id: '385730', account_id: '480753', paginated: true)
 
@@ -35,7 +36,8 @@ describe ::SaltEdge::BG::AccountTransactionsService do
     end
   end
 
-  context "with paginator at last page", vcr: { cassette_name: 'salt_edge/accounts/transactions/success_with_pagination_last_page' } do
+  context "with paginator at last page",
+    vcr: { cassette_name: 'salt_edge/accounts/transactions/success_with_pagination_last_page' } do
     it 'returns list of transactions without next page link' do
       result = described_class.call(consent_id: '385730', account_id: '480753', paginated: true, offset: 50, limit: 50)
 

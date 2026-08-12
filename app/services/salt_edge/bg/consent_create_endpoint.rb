@@ -1,13 +1,11 @@
+# frozen_string_literal: true
+
 module SaltEdge
   module BG
-    class ConsentCreateService
+    ConsentCreateEndpoint = ::Data.define(:redirect_url, :client) do
       extend Callable
-      attr_reader :redirect_url, :client
 
-      def initialize(redirect_url:, client: ClientFactory.with_provider)
-        @redirect_url = redirect_url
-        @client = client
-      end
+      def initialize(redirect_url:, client: ClientFactory.with_provider) = super
 
       def call
         response = client.post(
@@ -16,7 +14,7 @@ module SaltEdge
             "TPP-Redirect-URI" => redirect_url,
             "TPP-Redirect-Preferred" => "true"
           },
-          query: {
+          body: {
             recurringIndicator: true,
             frequencyPerDay: 4,
             validUntil: 30.days.from_now.utc.strftime("%Y-%m-%d"), # "2026-04-30"

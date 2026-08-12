@@ -11,7 +11,7 @@ module SaltEdge
           @cert = credentials.cert
         end
 
-        def headers_for(headers, body: nil)
+        def headers_for(headers, body = nil)
           sign_headers, rest = separate_headers(headers)
 
           sign_headers = pre_headers(body).merge(sign_headers)
@@ -50,7 +50,7 @@ module SaltEdge
         end
 
         def digest(body)
-          digest = OpenSSL::Digest::SHA256.new
+          digest = OpenSSL::Digest.new("SHA256")
           hash = digest.digest(body)
           "SHA-256=#{Base64.strict_encode64(hash)}"
         end
@@ -61,7 +61,7 @@ module SaltEdge
           header_keys = headers.keys.join(" ").downcase
 
           headers_str = headers.map { |k, v| "#{k.downcase}: #{v}" }.join("\n")
-          sign = private_key.sign(OpenSSL::Digest::SHA256.new, headers_str)
+          sign = private_key.sign(OpenSSL::Digest.new("SHA256"), headers_str)
           signature = Base64.strict_encode64(sign)
 
           "keyId=\"#{key_id}\",algorithm=\"#{algorithm}\",headers=\"#{header_keys}\",signature=\"#{signature}\""

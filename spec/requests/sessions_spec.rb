@@ -9,7 +9,7 @@ describe 'Sessions', type: :request do
     let(:consent) { { consent_status: 'valid' } }
 
     before do
-      allow(SaltEdge::BG::ConsentShowService).to receive(:call).and_return(consent)
+      allow(SaltEdge::BG::ConsentShowEndpoint).to receive(:call).and_return(consent)
     end
 
     context "has cached user:[uuid]:consent_creation" do
@@ -45,13 +45,13 @@ describe 'Sessions', type: :request do
 
     before do
       allow(SecureRandom).to receive(:uuid).and_return(uuid)
-      allow(::SaltEdge::BG::ConsentCreateService).to receive(:call).and_return(create_response)
-      allow(::SaltEdge::BG::ConsentShowService).to receive(:call).and_return(show_response)
+      allow(::SaltEdge::BG::ConsentCreateEndpoint).to receive(:call).and_return(create_response)
+      allow(::SaltEdge::BG::ConsentShowEndpoint).to receive(:call).and_return(show_response)
     end
 
     it "calls api with correct params" do
-      expect(::SaltEdge::BG::ConsentCreateService).to receive(:call).with(redirect_url: sessions_create_url(uuid: uuid))
-      expect(::SaltEdge::BG::ConsentShowService).to receive(:call).with(consent_id: '11')
+      expect(::SaltEdge::BG::ConsentCreateEndpoint).to receive(:call).with(redirect_url: sessions_create_url(uuid: uuid))
+      expect(::SaltEdge::BG::ConsentShowEndpoint).to receive(:call).with(consent_id: '11')
       get sessions_redirect_path
     end
 

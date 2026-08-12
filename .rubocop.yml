@@ -1,11 +1,61 @@
 # Omakase Ruby styling for Rails
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
-# Overwrite or add rules to create your own house style
-#
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  NewCops: enable
+
+Lint:
+  Enabled: true
+
+Lint/UnusedMethodArgument:
+  AllowUnusedKeywordArguments: true
+
+
+
+Rails:
+  Enabled: true
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: true
+  EnforcedStyle: nested
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 #Layout/SpaceInsideArrayLiteralBrackets:
 #  Enabled: false
 
-#AllCops:
-#  NewCops: enable
+Layout/MultilineMethodDefinitionBraceLayout:
+  Enabled: true
+Layout/ClosingParenthesisIndentation:
+  Enabled: true
+Layout/ParameterAlignment:
+  Enabled: true
+  EnforcedStyle: with_fixed_indentation
+Layout/ArgumentAlignment:
+  Enabled: true
+  EnforcedStyle: with_fixed_indentation
+Layout/FirstParameterIndentation:
+  Enabled: true
+Layout/EmptyLineBetweenDefs:
+  Enabled: true
+Layout/SpaceAroundOperators:
+  Enabled: true
+Layout/HashAlignment:
+  Enabled: true
+Layout/MultilineMethodParameterLineBreaks:
+  Enabled: true
+#Layout/MultilineMethodArgumentLineBreaks:
+#  Enabled: true
+Layout/FirstMethodParameterLineBreak:
+  Enabled: true
+#Layout/LineLength:
+#  Enabled: true
+#  Max: 120

@@ -27,7 +27,7 @@ module ApiClient
         private
 
         def parse_json(raw)
-          return nil if raw.nil? || raw.empty?
+          return nil if raw.blank?
 
           JSON.parse(raw)
         rescue JSON::ParserError

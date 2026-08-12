@@ -1,12 +1,11 @@
+# frozen_string_literal: true
+
 module SaltEdge
   module BG
-    class RegisterTppService
+    RegisterTppEndpoint = ::Data.define(:client) do
       extend Callable
-      attr_reader :client
 
-      def initialize(client: ClientFactory.global)
-        @client = client
-      end
+      def initialize(client: ClientFactory.global) = super
 
       def call
         client.post("tpp/register", body: {

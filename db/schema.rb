@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_12_125859) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_07_105030) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -30,5 +30,37 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_12_125859) do
     t.string "url", null: false
     t.index ["created_at"], name: "index_api_requests_on_created_at"
     t.index ["status_code"], name: "index_api_requests_on_status_code"
+  end
+
+  create_table "ob_api_tokens", force: :cascade do |t|
+    t.string "access_token"
+    t.datetime "created_at", null: false
+    t.datetime "expired_at"
+    t.string "id_token"
+    t.datetime "issued_at"
+    t.bigint "ob_consent_id"
+    t.string "refresh_token"
+    t.string "scope"
+    t.datetime "updated_at", null: false
+    t.index ["ob_consent_id"], name: "index_ob_api_tokens_on_ob_consent_id"
+  end
+
+  create_table "ob_consents", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "expired_at"
+    t.string "external_id"
+    t.jsonb "permissions"
+    t.integer "status", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.index ["external_id"], name: "index_ob_consents_on_external_id"
+  end
+
+  create_table "provider_configs", force: :cascade do |t|
+    t.string "authorization_endpoint"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.jsonb "scopes_supported", default: {}, null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_provider_configs_on_code"
   end
 end

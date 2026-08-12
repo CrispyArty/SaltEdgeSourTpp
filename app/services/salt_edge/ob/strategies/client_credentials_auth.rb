@@ -4,27 +4,20 @@ module SaltEdge
   module OB
     module Strategies
       class ClientCredentialsAuth
-        attr_reader :software_credentials, :cert_credentials
+        attr_reader :credentials
 
-        def initialize(
-          software_credentials: SoftwareCredentials.default,
-          cert_credentials: CertCredentials.obseal
-        )
-          @software_credentials = software_credentials
-          @cert_credentials = cert_credentials
+        def initialize(credentials: Credentials.default)
+          @credentials = credentials
         end
 
-        def headers_for(headers, body: nil)
+        def headers_for(headers, _body = nil)
           headers.merge("Authorization" => "Bearer #{create_token}")
         end
 
         private
 
         def create_token
-          TokenClientCredentialsService.call(
-            software_credentials: software_credentials,
-            cert_credentials: cert_credentials
-          )
+          TokenClientCredentialsEndpoint.call(credentials: credentials)
         end
       end
     end

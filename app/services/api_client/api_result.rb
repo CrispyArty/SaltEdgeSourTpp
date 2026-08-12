@@ -10,16 +10,23 @@ module ApiClient
       @body = body
     end
 
-    def [](key)
-      parsed[key]
-    end
+    delegate :[], to: :parsed
 
     def dig(*keys)
       parsed.dig(*keys)
     end
 
-    def with_indifferent_access
-      parsed.with_indifferent_access
+    delegate :with_indifferent_access, to: :parsed
+
+    def success?
+      status.between?(200, 299)
+    end
+
+    # Error bodies are not always JSON — an OB 401 carries no body at all.
+    def parsed_or_empty
+      parsed
+    rescue JSON::ParserError, TypeError
+      {}
     end
 
     private

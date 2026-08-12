@@ -1,22 +1,16 @@
+# frozen_string_literal: true
+
 module SaltEdge
   module OB
-    class TokenClientCredentialsService
+    TokenClientCredentialsEndpoint = ::Data.define(:provider, :client, :credentials) do
       extend Callable
       include JWTAssertionConcern
-
-      attr_reader :client, :software_credentials, :cert_credentials, :provider
 
       def initialize(
         provider: SaltEdge::Provider.ob,
         client: ClientFactory.oidc(provider),
-        software_credentials: SoftwareCredentials.default,
-        cert_credentials: CertCredentials.obseal
-      )
-        @client = client
-        @software_credentials = software_credentials
-        @cert_credentials = cert_credentials
-        @provider = provider
-      end
+        credentials: Credentials.default
+      ) = super
 
       def call
         api_result = client.post("tokens", body: {

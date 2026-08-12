@@ -1,5 +1,5 @@
 module SaltEdge
-  class TppVerifierService
+  class TppVerificationEndpoint
     extend Callable
 
     attr_reader :client
@@ -19,9 +19,9 @@ module SaltEdge
     end
 
     def call
-      test_cert = ::File.read(Rails.root.join("storage", "certificates", "client_signed_certificate.crt").to_s)
+      test_cert = ::File.read(Rails.root.join("storage/certificates/client_signed_certificate.crt").to_s)
 
-      response = client.post(
+      client.post(
         "tpp_verifiers/v2/certificates",
         body: {
           data: {
@@ -29,8 +29,6 @@ module SaltEdge
           }
         },
       )
-
-      p "--response", JSON.parse(response.body)
     end
   end
 end

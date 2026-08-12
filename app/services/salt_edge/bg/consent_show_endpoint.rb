@@ -1,13 +1,11 @@
+# frozen_string_literal: true
+
 module SaltEdge
   module BG
-    class ConsentShowService
+    ConsentShowEndpoint = ::Data.define(:consent_id, :client) do
       extend Callable
-      attr_reader :consent_id, :client
 
-      def initialize(consent_id:, client: ClientFactory.with_provider)
-        @consent_id = consent_id
-        @client = client
-      end
+      def initialize(consent_id:, client: ClientFactory.with_provider) = super
 
       def call
         response = client.get("consents/#{consent_id}")

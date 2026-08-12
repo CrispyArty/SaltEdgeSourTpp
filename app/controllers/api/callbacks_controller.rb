@@ -3,7 +3,7 @@ module Api
     # allow_browser versions: :modern
 
     def success
-      p "-----request", request
+      Rails.logger.debug "-----request", request
       render json: { status: "OK" }
     end
   end
