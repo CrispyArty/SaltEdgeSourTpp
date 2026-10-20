@@ -2,11 +2,13 @@
 
 module SaltEdge
   module OB
-    AccountsEndpoint = ::Data.define(:client) do
-      extend Callable
+    class AccountsEndpoint
+      include Callable
+
+      param :client
 
       def call
-        client.get("aisp/accounts11", headers: {
+        client.get("aisp/accounts", headers: {
           "x-fapi-interaction-id" => SecureRandom.uuid,
           "x-fapi-customer-ip-address" => "127.0.0.1",
           "Accept" => "application/json"

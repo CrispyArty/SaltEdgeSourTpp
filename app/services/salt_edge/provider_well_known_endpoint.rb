@@ -1,8 +1,6 @@
 module SaltEdge
   class ProviderWellKnownEndpoint
-    extend Callable
-
-    attr_reader :client, :provider_code
+    include Callable
 
     config = Rails.configuration.salt_edge
 
@@ -11,10 +9,8 @@ module SaltEdge
       sender: ApiClient::Sender.new
     )
 
-    def initialize(provider_code:, client: CLIENT)
-      @client = client
-      @provider_code = provider_code
-    end
+    param :provider_code
+    param :client, default: CLIENT
 
     def call
       data = client.get("/.well-known/openid-configuration/#{provider_code}")

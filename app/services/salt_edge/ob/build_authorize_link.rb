@@ -3,22 +3,12 @@
 module SaltEdge
   module OB
     class BuildAuthorizeLink
-      extend Callable
-      attr_reader :consent_id, :credentials, :redirect, :scope, :state, :nonce, :auth_url
+      include Callable
 
-      def initialize(
-        consent_id:,
-        auth_url:,
-        credentials: Credentials.default
-      )
-        @consent_id = consent_id
-        @credentials = credentials
-        @redirect = Rails.configuration.salt_edge[:ob_callback_url]
-        @scope = "openid accounts"
-        @state = SecureRandom.hex(16)
-        @nonce = SecureRandom.hex(16)
-        @auth_url = auth_url
-      end
+      param :consent_id
+      param :auth_url
+      param :state, default: -> { SecureRandom.hex(16) }
+      param :credentials, default: -> { Credentials.default }
 
       def call
         query = {
@@ -31,12 +21,16 @@ module SaltEdge
           request: jwt_request
         }.to_query
 
-        # url = ProviderConfig.find_by!(code: provider.code).authorization_endpoint
-
         auth_url + "?" + query
       end
 
       private
+
+      def redirect = Rails.configuration.salt_edge[:ob_callback_url]
+
+      def scope = "openid accounts"
+
+      def nonce = @nonce ||= SecureRandom.hex(16)
 
       def jwt_request
         JWT.encode(

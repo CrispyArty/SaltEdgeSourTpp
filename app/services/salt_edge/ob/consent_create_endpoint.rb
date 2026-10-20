@@ -4,10 +4,11 @@ module SaltEdge
   module OB
     ConsentCreateResponse = ::Data.define(:external_id, :status, :permissions, :expired_at)
 
-    ConsentCreateEndpoint = ::Data.define(:client) do
-      extend Callable
+    class ConsentCreateEndpoint
+      include Callable
 
-      def initialize(client: ClientFactory.initial) = super
+      param :provider, default: -> { SaltEdge::Provider.ob }
+      param :client, default: -> { ClientFactory.client_token_auth(provider:) }
 
       def call
         response = client.post("aisp/account-access-consents", body: {
@@ -19,7 +20,7 @@ module SaltEdge
             ],
             ExpirationDateTime: 89.days.from_now.utc.iso8601
             # TransactionFromDateTime: 90.days.ago.utc.iso8601,
-            # TransactionToDateTime: Time.now.utc.iso8601
+            # TransactionToDateTime: Time.now.utc.iso861
           },
           Risk: {}
         })

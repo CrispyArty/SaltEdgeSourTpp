@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 module ApiClient
-  # Every exception nests inside this module so Zeitwerk can resolve them:
-  # the file defines exactly the constant its path promises.
+  # Api exceptions
   module Errors
     Error = Class.new(StandardError)
 
@@ -19,9 +18,9 @@ module ApiClient
     end
 
     Unauthorized = Class.new(ResponseError) # 401
-    Forbidden    = Class.new(ResponseError) # 403
-    NotFound     = Class.new(ResponseError) # 404
-    ClientError  = Class.new(ResponseError) # other 4xx
-    ServerError  = Class.new(ResponseError) # 5xx
+    Forbidden = Class.new(ResponseError) # 403
+    NotFound = Class.new(ResponseError) # 404
+    ClientError = Class.new(ResponseError) # other 4xx
+    ServerError = Class.new(ResponseError) # 5xx
   end
 end

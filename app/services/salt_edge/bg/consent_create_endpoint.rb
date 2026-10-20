@@ -2,10 +2,11 @@
 
 module SaltEdge
   module BG
-    ConsentCreateEndpoint = ::Data.define(:redirect_url, :client) do
-      extend Callable
+    class ConsentCreateEndpoint
+      include Callable
 
-      def initialize(redirect_url:, client: ClientFactory.with_provider) = super
+      param :redirect_url
+      param :client, default: -> { ClientFactory.with_provider }
 
       def call
         response = client.post(

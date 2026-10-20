@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 module SaltEdge
-  Provider = Data.define(:code, :base_uri) do
+  Provider = Data.define(:code) do
     def self.bg
       config = Rails.configuration.salt_edge
-      new(code: config[:bg_provider], base_uri: config[:base_uri])
+      new(code: config[:bg_provider])
     end
 
     def self.ob
       config = Rails.configuration.salt_edge
-      new(code: config[:ob_provider], base_uri: config[:base_uri])
+      new(code: config[:ob_provider])
     end
   end
 end

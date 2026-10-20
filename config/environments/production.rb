@@ -63,7 +63,7 @@ Rails.application.configure do
   routes.default_url_options = {
     protocol: "http",
     host: "localhost",
-    port: 3000
+    port: 1337
   }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via bin/rails credentials:edit.

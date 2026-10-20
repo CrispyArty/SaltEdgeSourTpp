@@ -3,7 +3,6 @@
 module ApiClient
   module Errors
     # Decorator that turns non-2xx responses into typed exceptions.
-    # Wrap it around Logging::Sender so the response is logged before we raise.
     class Sender
       STATUS_ERRORS = {
         401 => Unauthorized,

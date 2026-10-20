@@ -2,15 +2,13 @@
 
 module SaltEdge
   module OB
-    TokenAuthorizationCodeEndpoint = ::Data.define(:code, :client, :credentials) do
-      extend Callable
+    class TokenAuthorizationCodeEndpoint
+      include Callable
       include JWTAssertionConcern
 
-      def initialize(
-        code:,
-        client: ClientFactory.oidc,
-        credentials: Credentials.default
-      ) = super
+      param :code
+      param :client, default: -> { ClientFactory.oidc }
+      param :credentials, default: -> { Credentials.default }
 
       def call
         response = client.post("tokens", body: {
@@ -20,8 +18,6 @@ module SaltEdge
           client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
           client_assertion: create_assertion
         })
-
-        raise "Token response should be 200, received #{response.status}" if response.status != 200
 
         Adapters::AccessToken.new(
           access_token: response["access_token"],

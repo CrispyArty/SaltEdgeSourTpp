@@ -2,15 +2,13 @@
 
 module SaltEdge
   module OB
-    TokenRefreshEndpoint = ::Data.define(:refresh_token, :client, :credentials) do
-      extend Callable
+    class TokenRefreshEndpoint
+      include Callable
       include JWTAssertionConcern
 
-      def initialize(
-        refresh_token:,
-        client: ClientFactory.oidc,
-        credentials: Credentials.default
-      ) = super
+      param :refresh_token
+      param :client, default: -> { ClientFactory.oidc }
+      param :credentials, default: -> { Credentials.default }
 
       def call
         response = client.post("tokens", body: {

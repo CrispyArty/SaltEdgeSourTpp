@@ -1,8 +1,6 @@
 module SaltEdge
   class TppVerificationEndpoint
-    extend Callable
-
-    attr_reader :client
+    include Callable
 
     config = Rails.configuration.salt_edge
     CLIENT = ApiClient::Client.new(
@@ -14,9 +12,7 @@ module SaltEdge
       sender: ApiClient::Logging::Sender.new(inner: ApiClient::Sender.new, logger: ApiClient::Logging::ApiRequestLogger.new)
     )
 
-    def initialize(client: CLIENT)
-      @client = client
-    end
+    param :client, default: CLIENT
 
     def call
       test_cert = ::File.read(Rails.root.join("storage/certificates/client_signed_certificate.crt").to_s)

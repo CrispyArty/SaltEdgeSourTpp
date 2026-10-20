@@ -16,7 +16,7 @@ module SaltEdge
         )
       end
 
-      def self.initial(provider = SaltEdge::Provider.ob)
+      def self.client_token_auth(provider: SaltEdge::Provider.ob)
         build(
           UriBuilders.provider(base_uri: config[:base_uri], provider: provider.code),
           auth: Strategies::ClientCredentialsAuth.new

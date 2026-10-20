@@ -3,8 +3,7 @@
 module SaltEdge
   module OB
     module ErrorParsers
-      # OIDC token endpoints: {"code","error","error_description"}
-      # "error" is a demodulized class name ("InvalidRequest"), not an OAuth2 code.
+      # OIDC token endpoints errors: {"code","error","error_description"}
       class Oidc
         def parse(result)
           body = result.parsed_or_empty

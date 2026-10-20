@@ -2,17 +2,15 @@
 
 module SaltEdge
   module BG
-    AccountTransactionsEndpoint = ::Data.define(:account_id, :consent_id, :paginated, :limit, :offset, :client) do
-      extend Callable
+    class AccountTransactionsEndpoint
+      include Callable
 
-      def initialize(
-        account_id:,
-        consent_id:,
-        paginated: false,
-        limit: 50,
-        offset: 0,
-        client: ClientFactory.with_provider
-      ) = super
+      param :account_id
+      param :consent_id
+      param :paginated, default: false
+      param :limit, default: 50
+      param :offset, default: 0
+      param :client, default: -> { ClientFactory.with_provider }
 
       def call
         data = client.get(

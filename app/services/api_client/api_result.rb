@@ -22,7 +22,6 @@ module ApiClient
       status.between?(200, 299)
     end
 
-    # Error bodies are not always JSON — an OB 401 carries no body at all.
     def parsed_or_empty
       parsed
     rescue JSON::ParserError, TypeError

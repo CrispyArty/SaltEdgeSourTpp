@@ -2,10 +2,10 @@
 
 module SaltEdge
   module OB
-    AddCertificateEndpoint = ::Data.define(:client) do
-      extend Callable
+    class AddCertificateEndpoint
+      include Callable
 
-      def initialize(client: ClientFactory.base) = super
+      param :client, default: -> { ClientFactory.base }
 
       def call
         client.post("tpp/certificates", body: {

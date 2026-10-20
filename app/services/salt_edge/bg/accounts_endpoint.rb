@@ -2,10 +2,11 @@
 
 module SaltEdge
   module BG
-    AccountsEndpoint = ::Data.define(:consent_id, :client) do
-      extend Callable
+    class AccountsEndpoint
+      include Callable
 
-      def initialize(consent_id:, client: ClientFactory.with_provider) = super
+      param :consent_id
+      param :client, default: -> { ClientFactory.with_provider }
 
       def call
         data = client.get(

@@ -2,10 +2,11 @@
 
 module SaltEdge
   module BG
-    ConsentShowEndpoint = ::Data.define(:consent_id, :client) do
-      extend Callable
+    class ConsentShowEndpoint
+      include Callable
 
-      def initialize(consent_id:, client: ClientFactory.with_provider) = super
+      param :consent_id
+      param :client, default: -> { ClientFactory.with_provider }
 
       def call
         response = client.get("consents/#{consent_id}")

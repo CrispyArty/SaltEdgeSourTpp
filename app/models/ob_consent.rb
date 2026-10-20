@@ -13,8 +13,8 @@ class OBConsent < ApplicationRecord
     "Revoked" => :revoked
   }.freeze
 
-  def self.create_from_api!(response)
-    create!(
+  def self.build_from_api(response)
+    build(
       external_id: response.external_id,
       status: API_STATUSES.fetch(response.status),
       permissions: response.permissions,

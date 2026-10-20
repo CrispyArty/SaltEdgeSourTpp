@@ -3,8 +3,7 @@
 module ApiClient
   module Errors
     module Parsers
-      # Fallback for clients built without a provider-specific parser.
-      # Understands no format, so it hands back the body untouched.
+      # Default error parser.
       class Raw
         MESSAGE_LIMIT = 200
 

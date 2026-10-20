@@ -34,12 +34,12 @@ module ApiClient
     def build_data(method, path, headers, query, body = nil)
       url = uri_builder.build(path)
 
-      headers = auth&.headers_for(headers, body) || headers
-
       if body.is_a?(Hash)
         headers = headers.merge("Content-Type" => "application/json")
         body = body.to_json
       end
+
+      headers = auth&.headers_for(headers, body) || headers
 
       RequestData.new(
         method: method,
