@@ -30,6 +30,10 @@ module SourTpp
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    app_url = URI(config_for(:application)[:app_url])
+    config.hosts << app_url.host
+    routes.default_url_options = { protocol: app_url.scheme, host: app_url.host, port: app_url.port }
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

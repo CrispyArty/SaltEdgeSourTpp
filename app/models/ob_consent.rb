@@ -23,6 +23,9 @@ class OBConsent < ApplicationRecord
   end
 
   def api_client
-    SaltEdge::OB::ClientFactory.authorized(token_provider: OBApiTokenAuthAdapter.new(ob_api_token))
+    SaltEdge::OB::ClientFactory.authorized(
+      token_provider: OBApiTokenAuthAdapter.new(ob_api_token),
+      provider: SaltEdge::Provider.new(code: provider_code)
+    )
   end
 end

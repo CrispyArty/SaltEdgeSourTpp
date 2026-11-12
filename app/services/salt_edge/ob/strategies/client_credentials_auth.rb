@@ -4,10 +4,11 @@ module SaltEdge
   module OB
     module Strategies
       class ClientCredentialsAuth
-        attr_reader :credentials
+        attr_reader :credentials, :provider
 
-        def initialize(credentials: Credentials.default)
+        def initialize(provider:, credentials: Credentials.default)
           @credentials = credentials
+          @provider = provider
         end
 
         def headers_for(headers, _body = nil)
@@ -17,7 +18,7 @@ module SaltEdge
         private
 
         def create_token
-          TokenClientCredentialsEndpoint.call(credentials: credentials)
+          TokenClientCredentialsEndpoint.call(credentials:, provider:)
         end
       end
     end

@@ -6,9 +6,9 @@ module SaltEdge
       include Callable
       include JWTAssertionConcern
 
-      param :provider, default: -> { SaltEdge::Provider.ob }
+      param :provider
+      param :credentials
       param :client, default: -> { ClientFactory.oidc(provider) }
-      param :credentials, default: -> { Credentials.default }
 
       def call
         api_result = client.post("tokens", body: {

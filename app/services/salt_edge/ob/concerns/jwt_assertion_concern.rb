@@ -16,7 +16,7 @@ module SaltEdge
             jti: uuid
           },
           credentials.private_key,
-          "RS256", { kid: "1" }
+          "PS256", { kid: "1" }
         )
       end
     end

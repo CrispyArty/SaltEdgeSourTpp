@@ -8,8 +8,16 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :users, only: [ :index, :show, :create ]
-    resource :callback, only: [] do
-      get :success
+    namespace :bg do
+      resource :callback, only: [] do
+        get :success
+      end
+    end
+
+    namespace :ob do
+      resource :callback, only: [] do
+        get :success
+      end
     end
   end
 

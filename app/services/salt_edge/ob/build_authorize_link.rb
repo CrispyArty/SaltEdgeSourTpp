@@ -6,29 +6,33 @@ module SaltEdge
       include Callable
 
       param :consent_id
-      param :auth_url
+      param :provider, default: -> { SaltEdge::Provider.ob }
       param :state, default: -> { SecureRandom.hex(16) }
       param :credentials, default: -> { Credentials.default }
+      param :redirect_uri, default: -> { Rails.configuration.salt_edge[:ob_callback_url] }
+      param :client, default: -> { ClientFactory.base }
 
       def call
+        client.get(".well-known/openid-configuration/#{provoder.code}") => {
+          authorization_endpoint: auth_url
+        }
+
         query = {
           client_id: credentials.app_id,
-          redirect_uri: redirect,
-          scope: scope,
           response_type: "code",
-          state: state,
-          nonce: nonce,
+          redirect_uri:,
+          scope:,
+          state:,
+          # nonce:,
           request: jwt_request
-        }.to_query
+        }.to_query.gsub("+", "%20")
 
         auth_url + "?" + query
       end
 
       private
 
-      def redirect = Rails.configuration.salt_edge[:ob_callback_url]
-
-      def scope = "openid accounts"
+      def scope = "openid accounts payments"
 
       def nonce = @nonce ||= SecureRandom.hex(16)
 
@@ -39,10 +43,10 @@ module SaltEdge
             client_id: credentials.app_id,
             aud: Rails.configuration.salt_edge[:base_uri], # well-known "issuer"
             response_type: "code",
-            redirect_uri: redirect,
-            scope: scope,
-            state: state,
-            nonce: nonce,
+            redirect_uri:,
+            scope:,
+            state:,
+            # nonce:,
             max_age: 3600,
             claims: {
               id_token: {

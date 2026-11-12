@@ -9,6 +9,8 @@ module SaltEdge
 
       param :provider, default: -> { SaltEdge::Provider.ob }
       param :client, default: -> { ClientFactory.client_token_auth(provider:) }
+      param :transactionFromDateTime, default: -> { 90.days.ago.utc.iso8601 }
+      param :transactionToDateTime, default: -> { Time.zone.parse("2026-11-08").utc.iso8601 }
 
       def call
         response = client.post("aisp/account-access-consents", body: {
@@ -19,8 +21,8 @@ module SaltEdge
               ReadTransactionsCredits ReadTransactionsDebits
             ],
             ExpirationDateTime: 89.days.from_now.utc.iso8601
-            # TransactionFromDateTime: 90.days.ago.utc.iso8601,
-            # TransactionToDateTime: Time.now.utc.iso861
+            # TransactionFromDateTime: transactionFromDateTime,
+            # TransactionToDateTime: transactionToDateTime
           },
           Risk: {}
         })

@@ -3,18 +3,19 @@
 module SaltEdge
   class CertCredentials
     MissingError = Class.new(StandardError)
+    CERTIFICATES_PATH = "storage/certificates_prod"
 
     def self.qseal
       @default ||= load(
-        cert_path: Rails.root.join("storage/certificates/cert_qseal.pem"),
-        key_path: Rails.root.join("storage/certificates/cert_qseal.key")
+        cert_path: Rails.root.join(CERTIFICATES_PATH, "cert_qseal.pem"),
+        key_path: Rails.root.join(CERTIFICATES_PATH, "cert_qseal.key")
       )
     end
 
     def self.obseal
       @default ||= load(
-        cert_path: Rails.root.join("storage/certificates/cert_obseal.pem"),
-        key_path: Rails.root.join("storage/certificates/cert_obseal.key")
+        cert_path: Rails.root.join(CERTIFICATES_PATH, "cert_obseal.pem"),
+        key_path: Rails.root.join(CERTIFICATES_PATH, "cert_obseal.key")
       )
     end
 

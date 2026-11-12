@@ -12,9 +12,11 @@ module Callable
 
     def params = @params ||= { args: {}, required: [] }
 
-    def param(key, default: PARAM_REQUIRED)
-      params[:args][key] = default
-      params[:required] << key if PARAM_REQUIRED.equal?(default)
+    def param(key, default: PARAM_REQUIRED, optional: false)
+      params[:args][key] = nil
+      params[:args][key] = default unless PARAM_REQUIRED.equal?(default)
+
+      params[:required] << key if PARAM_REQUIRED.equal?(default) && !optional
 
       attr_reader key
     end

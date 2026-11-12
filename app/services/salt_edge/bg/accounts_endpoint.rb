@@ -6,7 +6,8 @@ module SaltEdge
       include Callable
 
       param :consent_id
-      param :client, default: -> { ClientFactory.with_provider }
+      param :provider, default: -> { SaltEdge::Provider.bg }
+      param :client, default: -> { ClientFactory.with_provider(provider:) }
 
       def call
         data = client.get(

@@ -1,0 +1,6 @@
+shared:
+  app_url: "http://localhost:1337"
+
+# Public URL used for generated links (e.g. ngrok)
+# development:
+#   app_url: "https://your-domain.ngrok-free.dev"

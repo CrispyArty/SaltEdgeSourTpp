@@ -3,27 +3,27 @@
 module SaltEdge
   module OB
     class ClientFactory
-      def self.base(provider = SaltEdge::Provider.ob)
+      def self.base
         build(
-          UriBuilders.provider(base_uri: config[:base_uri], provider: provider.code)
+          UriBuilders.base(base_uri: config[:base_uri])
         )
       end
 
-      def self.authorized(token_provider:, provider: SaltEdge::Provider.ob)
+      def self.authorized(token_provider:, provider:)
         build(
           UriBuilders.provider(base_uri: config[:base_uri], provider: provider.code),
           auth: Strategies::AccessTokenAuth.new(token_provider: token_provider)
         )
       end
 
-      def self.client_token_auth(provider: SaltEdge::Provider.ob)
+      def self.client_token_auth(provider:)
         build(
           UriBuilders.provider(base_uri: config[:base_uri], provider: provider.code),
-          auth: Strategies::ClientCredentialsAuth.new
+          auth: Strategies::ClientCredentialsAuth.new(provider: provider)
         )
       end
 
-      def self.oidc(provider = SaltEdge::Provider.ob)
+      def self.oidc(provider:)
         build(
           UriBuilders.oidc(base_uri: config[:base_uri], provider: provider.code),
           error_parser: ErrorParsers::Oidc.new

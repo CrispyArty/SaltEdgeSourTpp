@@ -10,7 +10,8 @@ module SaltEdge
       param :paginated, default: false
       param :limit, default: 50
       param :offset, default: 0
-      param :client, default: -> { ClientFactory.with_provider }
+      param :provider, default: -> { SaltEdge::Provider.bg }
+      param :client, default: -> { ClientFactory.with_provider(provider:) }
 
       def call
         data = client.get(

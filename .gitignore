@@ -26,6 +26,7 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 /config/salt_edge.yml
+/config/application.yml
 
 # Ignore all environment files.
 /.env*

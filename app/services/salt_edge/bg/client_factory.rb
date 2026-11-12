@@ -3,7 +3,7 @@
 module SaltEdge
   module BG
     class ClientFactory
-      def self.with_provider(provider = SaltEdge::Provider.bg)
+      def self.with_provider(provider:)
         build(
           Strategies::TppSignatureAuth.new,
           uri_builder: UriBuilders.provider(

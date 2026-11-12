@@ -6,7 +6,9 @@ module SaltEdge
       include Callable
 
       param :redirect_url
-      param :client, default: -> { ClientFactory.with_provider }
+
+      param :provider, default: -> { SaltEdge::Provider.bg }
+      param :client, default: -> { ClientFactory.with_provider(provider:) }
 
       def call
         response = client.post(

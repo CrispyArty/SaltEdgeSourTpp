@@ -7,7 +7,7 @@ module ApiClient
         def request_payload(data)
           {
             method: data.method.to_s.upcase,
-            url: data.url,
+            url: data.url + Excon::Utils.query_string(query: data.query),
             request_headers: data.headers,
             request_body: parse_json(data.body)
           }

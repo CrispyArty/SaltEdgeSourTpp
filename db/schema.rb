@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_15_033113) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_12_145311) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -50,9 +50,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_033113) do
     t.datetime "expired_at"
     t.string "external_id"
     t.jsonb "permissions"
+    t.string "provider_code"
+    t.string "state"
     t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
-    t.string "uuid"
     t.index ["external_id"], name: "index_ob_consents_on_external_id"
   end
 

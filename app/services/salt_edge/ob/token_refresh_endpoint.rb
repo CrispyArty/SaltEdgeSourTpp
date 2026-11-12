@@ -9,15 +9,16 @@ module SaltEdge
       param :refresh_token
       param :client, default: -> { ClientFactory.oidc }
       param :credentials, default: -> { Credentials.default }
+      param :redirect_uri, default: -> { Rails.configuration.salt_edge[:ob_callback_url] }
 
       def call
         response = client.post("tokens", body: {
           grant_type: "refresh_token",
           scope: "accounts openid",
-          refresh_token: refresh_token,
-          redirect_uri: Rails.configuration.salt_edge[:ob_callback_url],
-          client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-          client_assertion: create_assertion
+          refresh_token:,
+          redirect_uri:,
+          client_assertion:,
+          client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
         })
 
         Adapters::AccessToken.new(

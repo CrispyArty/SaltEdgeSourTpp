@@ -13,6 +13,6 @@ class Settings
   end
 
   def ob_callback_url
-    Rails.application.routes.url_helpers.success_api_callback_url
+    Rails.application.routes.url_helpers.success_api_ob_callback_url
   end
 end

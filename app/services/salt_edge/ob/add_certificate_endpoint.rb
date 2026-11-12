@@ -8,7 +8,7 @@ module SaltEdge
       param :client, default: -> { ClientFactory.base }
 
       def call
-        client.post("tpp/certificates", body: {
+        client.post("api/open-banking/v3.1.11/tpp/certificates", body: {
           data: {
             certificate: {
               pem: CertCredentials.obseal.cert.to_pem,
