@@ -4,6 +4,8 @@ require "excon"
 
 module ApiClient
   class Sender
+    # @param data [RequestData]
+    # @retun [ApiResult]
     def call(data)
       response = Excon.send(
         data.method,
