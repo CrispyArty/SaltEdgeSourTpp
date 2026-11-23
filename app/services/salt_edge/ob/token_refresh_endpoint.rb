@@ -7,7 +7,8 @@ module SaltEdge
       include JWTAssertionConcern
 
       param :refresh_token
-      param :client, default: -> { ClientFactory.oidc }
+      param :provider
+      param :client, default: -> { ClientFactory.oidc(provider:) }
       param :credentials, default: -> { Credentials.default }
       param :redirect_uri, default: -> { Rails.configuration.salt_edge[:ob_callback_url] }
 

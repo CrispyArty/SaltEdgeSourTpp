@@ -3,7 +3,7 @@
 module SaltEdge
   class CertCredentials
     MissingError = Class.new(StandardError)
-    CERTIFICATES_PATH = "storage/certificates_prod"
+    CERTIFICATES_PATH = Rails.configuration.salt_edge[:certificates_path]
 
     def self.qseal
       @default ||= load(

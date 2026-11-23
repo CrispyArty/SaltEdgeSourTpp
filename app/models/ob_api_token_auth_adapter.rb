@@ -5,7 +5,10 @@ class OBApiTokenAuthAdapter
 
   def refresh!
     @record.update!(
-      SaltEdge::OB::TokenRefreshEndpoint.call(refresh_token: @record.refresh_token).attributes.compact
+      SaltEdge::OB::TokenRefreshEndpoint.call(
+        refresh_token: @record.refresh_token,
+        provider: SaltEdge::Provider.new(code: @record.ob_consent.provider_code)
+      ).attributes.compact
     )
   end
 end

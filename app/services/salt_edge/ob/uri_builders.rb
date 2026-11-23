@@ -9,7 +9,7 @@ module SaltEdge
 
       def self.provider(base_uri:, provider:)
         ApiClient::UriBuilders::Template.new(
-          pattern: "#{base_uri}/api/#{provider}/open-banking/v3.1.11/%{endpoint}"
+          pattern: "#{base_uri}/api/#{provider}/open-banking/v3.1/%{endpoint}"
         )
       end
 

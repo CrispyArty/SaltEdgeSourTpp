@@ -8,7 +8,7 @@ module SaltEdge
 
       param :provider
       param :credentials
-      param :client, default: -> { ClientFactory.oidc(provider) }
+      param :client, default: -> { ClientFactory.oidc(provider:) }
 
       def call
         api_result = client.post("tokens", body: {
